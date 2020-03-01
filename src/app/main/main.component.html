@@ -1,3 +1,7 @@
+<div *ngIf='gameStarted' [ngClass]='puzzler'>
+    <p>What number should I remember?</p>
+    <input type='number' [formControl]='input'> <button (click)='setSecretNumber(input.value)'>ok</button>
+</div>
 <div *ngIf='messages$ | async'>
     <div *ngFor='let message of messages' appPerson [ngClass]='message.person'>
       {{ message.text }}

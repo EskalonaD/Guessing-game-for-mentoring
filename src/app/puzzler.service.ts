@@ -20,7 +20,7 @@ export class PuzzlerService {
     this.state.chat$.next([this.guessedAnswerMessage(way, guess), 'puzzler']);
   }
 
-  rememberNumber(input: number): void {
+  private rememberNumber(input: number): void {
     this.state.secretNumber = input;
   }
 
