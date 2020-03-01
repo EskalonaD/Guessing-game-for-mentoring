@@ -14,20 +14,8 @@ export class GuesserService {
 
   messagesTemplate: string[] = ['Is this', 'Maybe it\'s', 'I think it is', 'How about'];
   currentGuess: number;
-  guess(way){
-    if(this.state.guessedNumbers) {
 
-      this.guess$.next([this.guessedMessage(way), 'guesser'])
-    }
-    this.firstGuess();
-  }
-
-  firstGuess() {
-    this.currentGuess = Math.ceil(Math.random() * 10);
-    this.guess$.next([this.currentGuess, 'guesser']);
-  }
-
-  guessedMessage(way: 'more' | 'less') {
+  guess(way: 'more' | 'less'): void {
     let guess = way === 'more' ? this.currentGuess + Math.ceil(Math.random() * 10) : this.currentGuess - Math.ceil(Math.random() * 10);
 
     while(true) {
@@ -35,9 +23,22 @@ export class GuesserService {
         way === 'more' ? guess++ : guess--;
         continue;
         };
-        
+
         this.state.guessedNumbers.push(guess);
-        return `${this.messagesTemplate[Math.floor(Math.random() * this.messagesTemplate.length)]} ${guess}`;
+        break;
       }
+
+      this.currentGuess = guess;
+      this.guess$.next([this.guessedMessage(this.currentGuess), 'guesser'])
+  }
+
+  firstGuess(): void {
+    this.currentGuess = Math.ceil(Math.random() * 10);
+    this.state.guessedNumbers.push(this.currentGuess);
+    this.guess$.next([this.currentGuess, 'guesser']);
+  }
+
+  guessedMessage(guess: number): string {
+    return `${this.messagesTemplate[Math.floor(Math.random() * this.messagesTemplate.length)]} ${guess}`;
   }
 }
