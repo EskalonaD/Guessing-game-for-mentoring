@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StateService } from '../state.service';
+import { GameService } from '../game.service';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +9,7 @@ import { StateService } from '../state.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private state: StateService ) { }
+  constructor(private state: StateService, private game: GameService) { }
 
   ngOnInit() {
   }
@@ -21,6 +22,6 @@ export class HeaderComponent implements OnInit {
 
   startGame() {
     this.console.log(1)
-    this.state.startGame();
+    this.game.startGame();
   }
 }

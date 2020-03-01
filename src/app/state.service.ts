@@ -13,18 +13,4 @@ export class StateService {
 
   console = console;
 
-  startGame() {
-    this.console.log('gamed')
-    this.isStarted = true;
-    this.console.log('state',this.isStarted)
-  }
-
-  endGame() {
-    this.isEnded = true;
-  }
-
-  closeGame() {
-    this.isStarted = false;
-    this.isEnded = false;
-  }
 }

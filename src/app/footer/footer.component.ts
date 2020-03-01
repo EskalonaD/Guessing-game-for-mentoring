@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StateService } from '../state.service';
+import { GameService } from '../game.service';
 
 @Component({
   selector: 'app-footer',
@@ -8,7 +9,7 @@ import { StateService } from '../state.service';
 })
 export class FooterComponent implements OnInit {
 
-  constructor(private state: StateService) { }
+  constructor(private state: StateService, private game: GameService) { }
 
   ngOnInit() {
   }
@@ -20,7 +21,7 @@ export class FooterComponent implements OnInit {
   }
 
   endGame() {
-    this.state.closeGame();
+    this.game.closeGame();
   }
 
 }
