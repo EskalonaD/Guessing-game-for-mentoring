@@ -38,4 +38,9 @@ export class GuesserService {
   guessedMessage(guess: number): string {
     return `${this.messagesTemplate[Math.floor(Math.random() * this.messagesTemplate.length)]} ${guess}`;
   }
+
+  listenInterlocutor(message: string): void {
+    const meaningfulInfo = message.includes('more') ? 'more' : 'less';
+    this.guess(meaningfulInfo);
+  }
 }
