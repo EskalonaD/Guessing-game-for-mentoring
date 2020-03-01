@@ -7,7 +7,7 @@ import { StateService } from './state.service';
 })
 export class PuzzlerService {
 
-  constructor(private game: GameService, private state: StateService) { }
+  constructor(private state: StateService) { }
 
   messagesTemplate: string[] = ['No, it\'s', 'You\'re not correct, it\'s', 'Try again, it\'s', 'Actually no, it\'s'];
 
@@ -17,7 +17,7 @@ export class PuzzlerService {
 
   guessAnswer(guess: number): void {
     const way = this.state.secretNumber > guess ? 'less' : 'more';
-    this.state.guess$.next([this.guessedAnswerMessage(way, guess), 'puzzler']);
+    this.state.chat$.next([this.guessedAnswerMessage(way, guess), 'puzzler']);
   }
 
   rememberNumber(input: number): void {

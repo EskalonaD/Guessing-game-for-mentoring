@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
 import { StateService } from './state.service';
 
 
@@ -9,8 +8,6 @@ import { StateService } from './state.service';
 export class GuesserService {
 
   constructor(private state: StateService) { }
-
-  guess$ = new Subject();
 
   messagesTemplate: string[] = ['Is this', 'Maybe it\'s', 'I think it is', 'How about'];
   currentGuess: number;
@@ -29,13 +26,13 @@ export class GuesserService {
       }
 
       this.currentGuess = guess;
-      this.guess$.next([this.guessedMessage(this.currentGuess), 'guesser'])
+      this.state.chat$.next([this.guessedMessage(this.currentGuess), 'guesser'])
   }
 
   firstGuess(): void {
     this.currentGuess = Math.ceil(Math.random() * 10);
     this.state.guessedNumbers.push(this.currentGuess);
-    this.guess$.next([this.currentGuess, 'guesser']);
+    this.state.chat$.next([this.currentGuess, 'guesser']);
   }
 
   guessedMessage(guess: number): string {

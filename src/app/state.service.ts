@@ -13,7 +13,7 @@ export class StateService {
   secretNumber: number;
   guessedNumbers: number[] = [];
 
-  guess$ = new Subject();
+  chat$ = new Subject();
 
   console = console;
 
