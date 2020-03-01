@@ -8,6 +8,7 @@ export class StateService {
   constructor() { }
 
   isStarted: boolean;
+  isEnded: boolean
   console = console;
 
   startGame() {
@@ -18,5 +19,6 @@ export class StateService {
 
   endGame() {
     this.isStarted = false;
+    this.isEnded = false;
   }
 }

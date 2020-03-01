@@ -4,11 +4,15 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { PersonDirective } from './person.directive';
 import { StateService } from './state.service';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PersonDirective
+    PersonDirective,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule
