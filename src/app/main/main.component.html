@@ -1,0 +1,5 @@
+<div *ngIf='messages$ | async'>
+    <div *ngFor='let message of messages' appPerson [ngClass]='message.person'>
+      {{ message.text }}
+    </div>
+  </div>
