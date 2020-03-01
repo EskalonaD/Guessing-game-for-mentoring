@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StateService } from '../state.service'
 import { GameService } from '../game.service';
 import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-main',
@@ -10,19 +11,21 @@ import { FormControl } from '@angular/forms';
 })
 export class MainComponent implements OnInit {
 
+  constructor(private state: StateService, private game: GameService){}
+
   ngOnInit() {
   }
 
-  constructor(private state: StateService, private game: GameService){}
 
-  get gameStarted() {
+  get gameStarted(): boolean {
     return this.state.isStarted;
   } 
 
-  input = new FormControl('');
+  input: FormControl = new FormControl('');
 
-  setSecretNumber(input: string) {
+  setSecretNumber(input: string): void {
     this.game.setGameParameters(+input)
   }
-  messages$ = this.state.messages$;
+
+  messages$: Observable<any[]> = this.state.messages$;
 }

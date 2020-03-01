@@ -16,11 +16,11 @@ export class HeaderComponent implements OnInit {
 
   console = console;
 
-  get shouldShow(){
+  get shouldShow(): boolean {
     return !this.state.isStarted;
   }
 
-  startGame() {
+  startGame(): void {
     this.console.log(1)
     this.game.startGame();
   }

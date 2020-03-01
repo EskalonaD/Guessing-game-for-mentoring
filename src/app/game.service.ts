@@ -15,21 +15,21 @@ export class GameService {
     ) { }
 
   
-  startGame() {
+  startGame(): void {
     this.state.console.log('gamed')
     this.state.isStarted = true;
     this.state.console.log('state',this.state.isStarted);
     // this.puzzler.
   }
 
-  setGameParameters(secret: number) {
+  setGameParameters(secret: number): void {
     console.log('secret number set, it\'s ', secret)
   }
-  endGame() {
+  endGame(): void {
     this.state.isEnded = true;
   }
 
-  closeGame() {
+  closeGame(): void {
     this.state.isStarted = false;
     this.state.isEnded = false;
   }

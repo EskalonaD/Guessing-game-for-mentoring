@@ -16,11 +16,11 @@ export class FooterComponent implements OnInit {
 
   console = console;
 
-  get shouldShow(){
+  get shouldShow(): boolean {
     return this.state.isEnded;
   }
 
-  endGame() {
+  endGame(): void {
     this.game.closeGame();
   }
 

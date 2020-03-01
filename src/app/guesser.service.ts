@@ -13,7 +13,8 @@ export class GuesserService {
   currentGuess: number;
 
   guess(way: 'more' | 'less'): void {
-    let guess = way === 'more' ? this.currentGuess + Math.ceil(Math.random() * 10) : this.currentGuess - Math.ceil(Math.random() * 10);
+    let guess: number = way === 'more' ? this.currentGuess + Math.ceil(Math.random() * 10)
+      : this.currentGuess - Math.ceil(Math.random() * 10);
 
     while(true) {
       if (this.state.guessedNumbers.includes(guess)) {

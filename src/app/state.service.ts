@@ -17,7 +17,7 @@ export class StateService {
   guessedNumbers: number[] = [];
 
 
-  messages$ = of([]).pipe(
+  messages$: Observable<any[]> = of([]).pipe(
     takeUntil(this.unsubscriber$),
     mergeMap(messageStore => this.chat$.pipe(       //check if regular map or switchmap will be fine
       map(value => messageStore.push(value) && messageStore)

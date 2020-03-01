@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Message } from './models';
-import { StateService } from './state.service';
 
 @Component({
   selector: 'app-root',
@@ -9,14 +7,7 @@ import { StateService } from './state.service';
 })
 export class AppComponent {
   title = 'game2';
-  console = console;
 
-  constructor(private state: StateService){}
-
-  messages: Array<Message> = [];
-
-
-
-
+  constructor(){}
 
 }
