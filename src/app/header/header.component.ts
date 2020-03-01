@@ -15,8 +15,8 @@ export class HeaderComponent implements OnInit {
 
   console = console;
 
-  get gameStarted(){
-    return this.state.isStarted;
+  get shouldShow(){
+    return !this.state.isStarted;
   }
 
   startGame() {

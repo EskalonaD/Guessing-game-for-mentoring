@@ -1,9 +1,7 @@
-<h1>Угадайка</h1>
-<button *ngIf="!gameStarted" (click)='startGame(); console.log(this.gameStarted);'>Начать игру</button>
+
 <!-- <router-otlet></router-otlet> -->
 <div *ngIf='messages'>
   <div *ngFor='let message of messages' appPerson [ngClass]='message.person'>
     {{ message.text }}
   </div>
 </div>
-<button *ngIf='gameStarted' (click)='endGame()'>Закончить игру</button>

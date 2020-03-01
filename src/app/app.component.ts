@@ -15,17 +15,8 @@ export class AppComponent {
 
   messages: Array<Message> = [];
 
-  get gameStarted(){
 
-    return this.state.isStarted;
-  }
 
-  startGame() {
-    this.console.log(1)
-    this.state.startGame();
-  }
 
-  endGame() {
-    this.state.endGame();
-  }
+
 }

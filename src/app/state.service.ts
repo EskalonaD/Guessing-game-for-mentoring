@@ -8,7 +8,9 @@ export class StateService {
   constructor() { }
 
   isStarted: boolean;
-  isEnded: boolean
+  isEnded: boolean;
+  guessedNumbers: number[];
+
   console = console;
 
   startGame() {
@@ -18,6 +20,10 @@ export class StateService {
   }
 
   endGame() {
+    this.isEnded = true;
+  }
+
+  closeGame() {
     this.isStarted = false;
     this.isEnded = false;
   }
