@@ -17,7 +17,7 @@ export class PuzzlerService {
 
   guessAnswer(guess: number): void {
     const way = this.state.secretNumber > guess ? 'less' : 'more';
-    this.state.chat$.next([this.guessedAnswerMessage(way, guess), 'puzzler']);
+    this.state.chat$.next({ text: this.guessedAnswerMessage(way, guess), person: 'puzzler' });
   }
 
   rememberNumber(input: number): void {
@@ -26,7 +26,8 @@ export class PuzzlerService {
 
 
   listenInterlocutor(message: string): void {
-    const meaningfulInfo = message.match(/\d*?/)[0];
+    const meaningfulInfo = message.match(/\d+/)[0];
+    console.log(meaningfulInfo);
     this.guessAnswer(+meaningfulInfo);
   }
 }

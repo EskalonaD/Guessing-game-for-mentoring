@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { GuesserService } from './guesser.service';
 import { PuzzlerService } from './puzzler.service';
 import { StateService } from './state.service';
+import { takeUntil, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,15 @@ export class GameService {
     private state: StateService
     ) { }
 
-  
+  chatListener$  = this.state.chat$.pipe(
+    takeUntil(this.state.unsubscriber$),
+    tap((data: { text: string, person: string }) => {
+      const person = data.person === 'guesser' ? 'puzzler' : 'guesser';
+      this[person].listenInterlocutor(data.text);
+      // console.log(data.person)
+    })
+  ).subscribe();
+
   startGame(): void {
     this.state.console.log('gamed')
     this.state.isStarted = true;

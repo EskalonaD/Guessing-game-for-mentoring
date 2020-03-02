@@ -2,8 +2,8 @@
     <p>What number should I remember?</p>
     <input type='number' [formControl]='input'> <button (click)='setSecretNumber(input.value)'>ok</button>
 </div>
-<div *ngIf='messages$ | async'>
-    <div *ngFor='let message of messages' appPerson [ngClass]='message.person'>
+<div *ngIf='messages$ | async as messages'>
+    <div *ngFor='let message of messages' [ngClass]='message.person'>
       {{ message.text }}
     </div>
   </div>

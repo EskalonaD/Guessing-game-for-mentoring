@@ -27,13 +27,13 @@ export class GuesserService {
       }
 
       this.currentGuess = guess;
-      this.state.chat$.next([this.guessedMessage(this.currentGuess), 'guesser'])
+      this.state.chat$.next({ text: this.guessedMessage(this.currentGuess), person: 'guesser' })
   }
 
   firstGuess(): void {
     this.currentGuess = Math.ceil(Math.random() * 10);
     this.state.guessedNumbers.push(this.currentGuess);
-    this.state.chat$.next([this.currentGuess, 'guesser']);
+    this.state.chat$.next({ text: `${this.currentGuess}`, person: 'guesser' });
   }
 
   guessedMessage(guess: number): string {
