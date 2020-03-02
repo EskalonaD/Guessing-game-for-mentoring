@@ -23,8 +23,12 @@ export class GameService {
   }
 
   setGameParameters(secret: number): void {
-    console.log('secret number set, it\'s ', secret)
+    console.log('secret number set, it\'s ', secret);
+    this.puzzler.rememberNumber(secret);
+    this.guesser.firstGuess();
+    console.log(this.state.secretNumber);
   }
+
   endGame(): void {
     this.state.isEnded = true;
   }

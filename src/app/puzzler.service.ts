@@ -20,9 +20,10 @@ export class PuzzlerService {
     this.state.chat$.next([this.guessedAnswerMessage(way, guess), 'puzzler']);
   }
 
-  private rememberNumber(input: number): void {
+  rememberNumber(input: number): void {
     this.state.secretNumber = input;
   }
+
 
   listenInterlocutor(message: string): void {
     const meaningfulInfo = message.match(/\d*?/)[0];
