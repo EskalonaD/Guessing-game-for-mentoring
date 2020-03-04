@@ -30,7 +30,9 @@ export class GuesserService {
       }
 
       this.currentGuess = guess;
-      this.state.chat$.next({ text: this.guessedMessage(this.currentGuess), person: 'guesser' })
+      setTimeout(() => this.state.chat$.next({ text: this.guessedMessage(this.currentGuess), person: 'guesser' }), 1000);
+
+      // this.state.chat$.next({ text: this.guessedMessage(this.currentGuess), person: 'guesser' })
   }
 
   firstGuess(): void {

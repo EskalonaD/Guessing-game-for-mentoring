@@ -19,7 +19,7 @@ export class PuzzlerService {
   guessAnswer(guess: number): void {
     const way = this.state.secretNumber === guess ? 'match'
       : this.state.secretNumber > guess ? 'more' : 'less';
-    this.state.chat$.next({ text: this.guessedAnswerMessage(way, guess), person: 'puzzler', });
+    setTimeout(() => this.state.chat$.next({ text: this.guessedAnswerMessage(way, guess), person: 'puzzler', }), 1000);
   }
 
   rememberNumber(input: number): void {
