@@ -14,7 +14,10 @@ export class GuesserService {
 
   guess(way: 'more' | 'less' | 'match'): void {
     if(way === 'match') {
-      return this.state.chat$.next({ text: 'Hooray!', person: 'guesser', stop: true })
+      setTimeout(() => this.state.chat$.next({ text: 'Hooray!', person: 'guesser', stop: true }), 1000);
+      return; 
+
+      
     }
     let guess: number = way === 'more' ? this.currentGuess + Math.ceil(Math.random() * 10)
       : this.currentGuess - Math.ceil(Math.random() * 10);
