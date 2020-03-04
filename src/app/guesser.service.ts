@@ -12,7 +12,10 @@ export class GuesserService {
   messagesTemplate: string[] = ['Is this', 'Maybe it\'s', 'I think it is', 'How about'];
   currentGuess: number;
 
-  guess(way: 'more' | 'less'): void {
+  guess(way: 'more' | 'less' | 'match'): void {
+    if(way === 'match') {
+      return this.state.chat$.next({ text: 'Hooray!', person: 'guesser', stop: true })
+    }
     let guess: number = way === 'more' ? this.currentGuess + Math.ceil(Math.random() * 10)
       : this.currentGuess - Math.ceil(Math.random() * 10);
 
@@ -41,6 +44,7 @@ export class GuesserService {
   }
 
   listenInterlocutor(message: string): void {
+    if(message === 'You are right!') return this.guess('match');
     const meaningfulInfo = message.includes('more') ? 'more' : 'less';
     this.guess(meaningfulInfo);
   }

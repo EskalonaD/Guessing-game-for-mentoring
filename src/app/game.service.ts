@@ -17,17 +17,17 @@ export class GameService {
 
   chatListener$  = this.state.chat$.pipe(
     takeUntil(this.state.unsubscriber$),
-    tap((data: { text: string, person: string }) => {
+    tap((data: { text: string, person: string, stop?: boolean}) => {
+      if(data.stop === true) return;
       const person = data.person === 'guesser' ? 'puzzler' : 'guesser';
       this[person].listenInterlocutor(data.text);
-      // console.log(data.person)
     })
   ).subscribe();
 
   startGame(): void {
-    this.state.console.log('gamed')
+    // this.state.console.log('gamed')
     this.state.isStarted = true;
-    this.state.console.log('state',this.state.isStarted);
+    // this.state.console.log('state',this.state.isStarted);
     // this.puzzler.
   }
 
@@ -35,7 +35,7 @@ export class GameService {
     console.log('secret number set, it\'s ', secret);
     this.puzzler.rememberNumber(secret);
     this.guesser.firstGuess();
-    console.log(this.state.secretNumber);
+    // console.log(this.state.secretNumber);
   }
 
   endGame(): void {

@@ -11,13 +11,15 @@ export class PuzzlerService {
 
   messagesTemplate: string[] = ['No, it\'s', 'You\'re not correct, it\'s', 'Try again, it\'s', 'Actually no, it\'s'];
 
-  guessedAnswerMessage(way: 'more' | 'less', guess: number): string {
+  guessedAnswerMessage(way: 'more' | 'less' | 'match', guess: number): string {
+    if(way === 'match') return 'You are right!';
     return `${this.messagesTemplate[Math.floor(Math.random() * this.messagesTemplate.length)]} ${way} than ${guess}`;
   };
 
   guessAnswer(guess: number): void {
-    const way = this.state.secretNumber > guess ? 'less' : 'more';
-    this.state.chat$.next({ text: this.guessedAnswerMessage(way, guess), person: 'puzzler' });
+    const way = this.state.secretNumber === guess ? 'match'
+      : this.state.secretNumber > guess ? 'more' : 'less';
+    this.state.chat$.next({ text: this.guessedAnswerMessage(way, guess), person: 'puzzler', });
   }
 
   rememberNumber(input: number): void {
@@ -26,8 +28,9 @@ export class PuzzlerService {
 
 
   listenInterlocutor(message: string): void {
-    const meaningfulInfo = message.match(/\d+/)[0];
-    console.log(meaningfulInfo);
+    const meaningfulInfo = message.match(/-?\d{1,}/g)[0];
+    console.log(message.match(/-?\d{1,}/g))
+    console.log('meaningfulInfo');
     this.guessAnswer(+meaningfulInfo);
   }
 }
