@@ -1,0 +1,4 @@
+<div class="logo"></div>
+<div class="nick"></div>
+<div class="loader" *ngIf='showLoader; else messageBlock'>loading...</div>
+<ng-template class="message" #messageBlock> {{ message.text }}</ng-template>

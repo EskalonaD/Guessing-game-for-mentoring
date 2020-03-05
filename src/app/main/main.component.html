@@ -3,7 +3,5 @@
     <input type='number' [formControl]='input'> <button (click)='setSecretNumber(input.value)'>ok</button>
 </div>
 <div *ngIf='messages$ | async as messages'>
-    <div *ngFor='let message of messages' [ngClass]='message.person'>
-      {{ message.text }}
-    </div>
-  </div>
+    <app-message *ngFor='let message of messages' [message]='message'></app-message>
+</div>

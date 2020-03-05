@@ -8,6 +8,7 @@ import { StateService } from './state.service';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { MainComponent } from './main/main.component';
+import { MessageComponent } from './message/message.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { MainComponent } from './main/main.component';
     PersonDirective,
     HeaderComponent,
     FooterComponent,
-    MainComponent
+    MainComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
