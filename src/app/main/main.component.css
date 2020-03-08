@@ -1,0 +1,11 @@
+.puzzler {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-left: auto;
+}
+
+.guesser {
+    display: flex;
+    flex-direction: row;
+    margin-right: auto;
+}
