@@ -2,9 +2,9 @@
     margin: 10px;
 
     align-items: center;
-    width: 70%;
+    width: 500px;
+    max-width: 70%;
 
-    border: 2px solid rgb(16, 191, 214);
     border-radius: 15px;
 
     background-color: rgb(165, 135, 121);
@@ -22,6 +22,7 @@ img {
     margin: 0 auto;
     height: 80px;
     width: 80px;
+    border-radius: 5px;
 }
 
 .nickname  {
@@ -29,13 +30,12 @@ img {
     font-size: 23px;
     margin-bottom: 0px;
     margin-top: 5px;
+    color: #000;
 }
 
 .message {
-    /* margin-bottom: 8px; */
     padding: 15px;
     color: 18px;
-
 }
 
 .loader {
@@ -43,7 +43,11 @@ img {
     align-self: flex-end;
     margin-bottom: 1px;
     color: rgb(35, 102, 146);
-    /* color:  */
+    font-weight: normal;
+}
+
+:host.guesser .loader {
+    color: rgb(252, 143, 228);
 }
 
 

@@ -1,4 +1,4 @@
-<div *ngIf='gameStarted' [ngClass]='puzzler'>
+<div *ngIf='gameStarted' class='number-saver'>
     <p>What number should I remember?</p>
     <input type='number' [formControl]='input'> <button (click)='setSecretNumber(input.value)'>ok</button>
 </div>
