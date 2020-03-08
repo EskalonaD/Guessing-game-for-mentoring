@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+
+}
+
+:root {
+    --globalPadding: 10px;
+}
+
+body {
+    /* max-height: 100vh; */
+    padding: var(--globalPadding);
+    
+}
+.wrapper {
+
+    min-height: calc(100vh - 2 * var(--globalPadding));
+    /* min-width: 100vw; */
+    /* height: 100vh;
+    width: 100vw; */
+    padding: 10px;
+    background-color: #ddd;
+    border: 1px solid #666;
+}

@@ -7,6 +7,11 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class MessageComponent implements OnInit {
 
+  get logoURL(): string {
+    return this.message.person === 'puzzler'
+        ? 'https://avatarfiles.alphacoders.com/715/71560.jpg'
+        : 'https://avatarfiles.alphacoders.com/114/114469.png'
+  }
   constructor() { }
 
   @Input() message: { text: string, person: 'puzzler' | 'guesser', stop?: boolean };
