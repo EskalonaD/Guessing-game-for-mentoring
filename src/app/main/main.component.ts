@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, Host } from '@angular/core';
 import { StateService } from '../state.service'
 import { GameService } from '../game.service';
 import { FormControl } from '@angular/forms';
@@ -16,10 +16,15 @@ export class MainComponent implements OnInit {
   ngOnInit() {
   }
 
+  
 
   get gameStarted(): boolean {
     return this.state.isStarted;
-  } 
+  }
+
+  get shouldScroll(): boolean {
+    return this.state.shouldScroll;
+  }
 
   input: FormControl = new FormControl('');
 
@@ -28,4 +33,9 @@ export class MainComponent implements OnInit {
   }
 
   messages$: Observable<any[]> = this.state.messages$;
+
+  @HostListener('wheel') scollHandler(): void {
+    console.log(this.state.shouldScroll)
+    this.state.shouldScroll = false;
+  }
 }

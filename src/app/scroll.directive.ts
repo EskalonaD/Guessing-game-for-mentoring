@@ -4,11 +4,14 @@ import { Directive, Input, AfterViewInit, ElementRef, wtfLeave } from '@angular/
   selector: '[appScroll]'
 })
 export class ScrollDirective implements AfterViewInit {
-  @Input('app-scroll') options: any;
+  @Input('appScroll') shouldApply: boolean;
   constructor(private el: ElementRef ) { }
 
   ngAfterViewInit() {
-    this.el.nativeElement.scrollIntoView({ behavior: 'smooth' });
+    if (this.shouldApply) {
+      console.log(this.shouldApply)
+      this.el.nativeElement.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 
 }

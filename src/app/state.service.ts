@@ -15,6 +15,8 @@ export class StateService {
   isEnded: boolean;
   secretNumber: number;
   guessedNumbers: number[] = [];
+  
+  shouldScroll: boolean = true;
 
 
   // messages$/*: Observable<any[]>*/ = new Observable(x => x.next([])).pipe(
