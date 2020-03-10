@@ -9,6 +9,7 @@ import { FooterComponent } from './footer/footer.component';
 import { MainComponent } from './main/main.component';
 import { MessageComponent } from './message/message.component';
 import { ScrollDirective } from './scroll.directive';
+import { ScrollButtonComponent } from './scroll-button/scroll-button.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ScrollDirective } from './scroll.directive';
     FooterComponent,
     MainComponent,
     MessageComponent,
-    ScrollDirective
+    ScrollDirective,
+    ScrollButtonComponent
   ],
   imports: [
     BrowserModule,

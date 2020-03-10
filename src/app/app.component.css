@@ -1,6 +1,7 @@
 * {
     margin: 0;
     box-sizing: border-box;
+    padding: 0;
 
 }
 
@@ -9,12 +10,15 @@
 }
 
 body {
-    padding: var(--globalPadding);
+    /* padding: var(--globalPadding); */
 }
 
 .wrapper {
     min-height: calc(100vh - 2 * var(--globalPadding));
-    padding: 10px;
+    max-height: calc(100vh - 2 * var(--globalPadding));
+    margin: var(--globalPadding);
+    padding: var(--globalPadding);
     background-color: #ddd;
     border: 1px solid #666;
+    overflow: auto;
 }
