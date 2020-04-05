@@ -37,9 +37,3 @@
     overflow: hidden;
 
 }
-
-.scroll-buttons-container {
-    position: fixed;
-    right: 15%;
-    bottom: 20%;
-}

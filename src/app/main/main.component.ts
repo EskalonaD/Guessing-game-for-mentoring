@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, Host, ElementRef } from '@angular/core';
+import { Component, OnInit, HostListener, Host, ElementRef, ViewChild } from '@angular/core';
 import { StateService } from '../state.service'
 import { GameService } from '../game.service';
 import { FormControl } from '@angular/forms';
@@ -15,6 +15,7 @@ enum Scroll {
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
+
 
   constructor(private state: StateService, private game: GameService, private el: ElementRef){}
 
@@ -37,29 +38,16 @@ export class MainComponent implements OnInit {
     this.game.setGameParameters(+input)
   }
 
-
-  // move scroll logic into app component, use enum add logic if on top - don't use top button vice versa
-  topScroll=  this.el.nativeElement.scrollWidth > this.el.nativeElement.clientWidth;
-  bottomScroll=true;
-  scrollTo(way: string): void {
-    if(way === 'top') {
-      this.state.shouldScroll = false;
-      this.el.nativeElement.scrollIntoView({ block: 'start', behavior: 'smooth' })
-    }
-    
-    if(way === 'bottom') {
-      this.state.shouldScroll = true;
-      this.el.nativeElement.scrollIntoView({ block: 'end', behavior: 'smooth' });
-      this.bottomScroll = false;
-      this.topScroll = true;
-    }
-  }
-
   messages$: Observable<any[]> = this.state.messages$;
 
   @HostListener('wheel') scollHandler(): void {
-    console.log(this.state.shouldScroll)
+//     console.log(this.state.shouldScroll)
 // console.log('scroll', this.el.nativeElement.scrollHeight);
+// console.log(this.wrapper);
+// console.log(this.wrapper.nativeElement.scrollHeight)
+// console.log(this.wrapper.nativeElement.clientHeight)
+
+// console.log((<any>this.wrapper).scrollWidth);
 // console.log('client', this.el.nativeElement.clientHeight);
     
 
