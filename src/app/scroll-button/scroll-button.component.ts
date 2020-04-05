@@ -11,7 +11,15 @@ export class ScrollButtonComponent implements OnInit {
 
   constructor() { }
 
+  arrowDirection = {
+    top: '&#8648;',
+    bottom: '&#8650;',
+  }
+
   ngOnInit() {
   }
 
+  onClick() {
+    this.scrollTo.emit(this.direction);
+  }
 }

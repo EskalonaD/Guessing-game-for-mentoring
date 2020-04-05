@@ -10,7 +10,8 @@
             <app-message *ngFor='let message of messages' [message]='message' [ngClass]='message.person' [appScroll]='shouldScroll'></app-message>
         </div>
     </div>
-    
-    <app-scroll-button direction='top' *ngIf='topScroll' (scrollTo)='scrollTo($event)'></app-scroll-button>
-    <app-scroll-button direction='bottom' *ngIf='bottomScroll' (scrollTo)='scrollTo($event)'></app-scroll-button>
+    <div class="scroll-buttons-container">
+        <app-scroll-button direction='top' *ngIf='topScroll' (scrollTo)='scrollTo($event)'></app-scroll-button>
+        <app-scroll-button direction='bottom' *ngIf='bottomScroll' (scrollTo)='scrollTo($event)'></app-scroll-button>
+    </div>
 </div>

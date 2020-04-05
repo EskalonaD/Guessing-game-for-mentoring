@@ -4,6 +4,11 @@ import { GameService } from '../game.service';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 
+enum Scroll {
+  'top',
+  'bottom'
+}
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -32,7 +37,9 @@ export class MainComponent implements OnInit {
     this.game.setGameParameters(+input)
   }
 
-  topScroll= true;
+
+  // move scroll logic into app component
+  topScroll=  this.el.nativeElement.scrollWidth > this.el.nativeElement.clientWidth;
   bottomScroll=true;
   scrollTo(way: string): void {
     if(way === 'top') {
@@ -42,7 +49,9 @@ export class MainComponent implements OnInit {
     
     if(way === 'bottom') {
       this.state.shouldScroll = true;
-      this.el.nativeElement.scrollIntoView({ block: 'start', behavior: 'smooth' })
+      this.el.nativeElement.scrollIntoView({ block: 'end', behavior: 'smooth' });
+      this.bottomScroll = false;
+      this.topScroll = true;
     }
   }
 
@@ -50,6 +59,10 @@ export class MainComponent implements OnInit {
 
   @HostListener('wheel') scollHandler(): void {
     console.log(this.state.shouldScroll)
+// console.log('scroll', this.el.nativeElement.scrollHeight);
+// console.log('client', this.el.nativeElement.clientHeight);
+    
+
     if(this.state.shouldScroll) {
 
       this.state.shouldScroll = false;
@@ -58,9 +71,9 @@ export class MainComponent implements OnInit {
   }
 
 
-  @HostListener('keyup') keyUpHandler(): void {
-    if (!this.state.shouldScroll) {
-      this.state.shouldScroll= true;
-    }
-  }
+  // @HostListener('keyup') keyUpHandler(): void {
+  //   if (!this.state.shouldScroll) {
+  //     this.state.shouldScroll= true;
+  //   }
+  // }
 }
