@@ -38,7 +38,7 @@ export class MainComponent implements OnInit {
   }
 
 
-  // move scroll logic into app component
+  // move scroll logic into app component, use enum add logic if on top - don't use top button vice versa
   topScroll=  this.el.nativeElement.scrollWidth > this.el.nativeElement.clientWidth;
   bottomScroll=true;
   scrollTo(way: string): void {
