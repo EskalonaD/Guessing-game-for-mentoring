@@ -14,8 +14,6 @@ export class FooterComponent implements OnInit {
   ngOnInit() {
   }
 
-  console = console;
-
   get shouldShow(): boolean {
     return this.state.isEnded;
   }

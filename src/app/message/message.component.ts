@@ -1,30 +1,28 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-message',
-  templateUrl: './message.component.html',
-  styleUrls: ['./message.component.css']
+    selector: 'app-message',
+    templateUrl: './message.component.html',
+    styleUrls: ['./message.component.css']
 })
 export class MessageComponent implements OnInit {
 
-  get logoURL(): string {
-    return this.message.person === 'puzzler'
-        ? 'https://avatarfiles.alphacoders.com/715/71560.jpg'
-        : 'https://avatarfiles.alphacoders.com/114/114469.png'
-  }
-  constructor() { }
+    get logoURL(): string {
+        return this.message.person === 'puzzler'
+            ? 'https://avatarfiles.alphacoders.com/715/71560.jpg'
+            : 'https://avatarfiles.alphacoders.com/114/114469.png'
+    }
 
-  @Input() message: { text: string, person: 'puzzler' | 'guesser', stop?: boolean };
-  showLoader: boolean = false;
+    constructor() { }
 
-  ngOnInit() {
-    this.showLoader = true;
+    @Input() message: { text: string, person: 'puzzler' | 'guesser', stop?: boolean };
+    showLoader: boolean = false;
 
-    setTimeout(() => {
-      this.showLoader = false;
-    }, 500);
+    ngOnInit() {
+        this.showLoader = true;
 
-
-  }
-
+        setTimeout(() => {
+            this.showLoader = false;
+        }, 800);
+    }
 }

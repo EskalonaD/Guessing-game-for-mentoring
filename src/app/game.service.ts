@@ -5,45 +5,40 @@ import { StateService } from './state.service';
 import { takeUntil, tap } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class GameService {
 
-  constructor(
-    private guesser: GuesserService,
-    private puzzler: PuzzlerService,
-    private state: StateService
+    constructor(
+        private guesser: GuesserService,
+        private puzzler: PuzzlerService,
+        private state: StateService
     ) { }
 
-  chatListener$  = this.state.chat$.pipe(
-    takeUntil(this.state.unsubscriber$),
-    tap((data: { text: string, person: string, stop?: boolean}) => {
-      if(data.stop === true) return;
-      const person = data.person === 'guesser' ? 'puzzler' : 'guesser';
-      this[person].listenInterlocutor(data.text);
-    })
-  ).subscribe();
+    chatListener$ = this.state.chat$.pipe(
+        takeUntil(this.state.unsubscriber$),
+        tap((data: { text: string, person: string, stop?: boolean }) => {
+            if (data.stop === true) return;
+            const person = data.person === 'guesser' ? 'puzzler' : 'guesser';
+            this[person].listenInterlocutor(data.text);
+        })
+    ).subscribe();
 
-  startGame(): void {
-    // this.state.console.log('gamed')
-    this.state.isStarted = true;
-    // this.state.console.log('state',this.state.isStarted);
-    // this.puzzler.
-  }
+    startGame(): void {
+        this.state.isStarted = true;
+    }
 
-  setGameParameters(secret: number): void {
-    console.log('secret number set, it\'s ', secret);
-    this.puzzler.rememberNumber(secret);
-    this.guesser.firstGuess();
-    // console.log(this.state.secretNumber);
-  }
+    setGameParameters(secret: number): void {
+        this.puzzler.rememberNumber(secret);
+        this.guesser.firstGuess();
+    }
 
-  endGame(): void {
-    this.state.isEnded = true;
-  }
+    endGame(): void {
+        this.state.isEnded = true;
+    }
 
-  closeGame(): void {
-    this.state.isStarted = false;
-    this.state.isEnded = false;
-  }
+    closeGame(): void {
+        this.state.isStarted = false;
+        this.state.isEnded = false;
+    }
 }

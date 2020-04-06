@@ -1,7 +1,6 @@
 .main-wrapper {
     display: flex;
     flex-direction: column;
-    /* /* max-height: 100%; */
 }
 .puzzler {
     display: flex;
@@ -9,7 +8,6 @@
     margin-left: auto;
     font-weight: bold;
     border: 2px solid rgb(16, 191, 214);
-
 }
 
 .guesser {
@@ -24,16 +22,10 @@
 .number-saver {
     text-align: right;
     min-height: 100px;
-    /* flex-basis: 20%; */
-    /* position: sticky;
-    top: 0;
-    background-color: #ddd; */
 }
 
 .message-wrapper {
     flex-basis: 80%;
     flex-grow: 1;
-    background-color: red;
     overflow: hidden;
-
 }

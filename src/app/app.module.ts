@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { StateService } from './state.service';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { MainComponent } from './main/main.component';
@@ -27,7 +26,6 @@ import { ScrollButtonComponent } from './scroll-button/scroll-button.component';
     ReactiveFormsModule,
   ],
   providers: [
-    // StateService
   ],
   bootstrap: [AppComponent]
 })

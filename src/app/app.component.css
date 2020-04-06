@@ -2,15 +2,10 @@
     margin: 0;
     box-sizing: border-box;
     padding: 0;
-
 }
 
 :root {
     --globalPadding: 10px;
-}
-
-body {
-    /* padding: var(--globalPadding); */
 }
 
 .wrapper {
@@ -22,7 +17,6 @@ body {
     border: 1px solid #666;
     overflow: auto;
 }
-
 
 .scroll-buttons-container {
     position: fixed;

@@ -1,12 +1,17 @@
 <div class="wrapper" #wrapper (scroll)='onScroll()'>
     <div #contentContainer>
-    <app-header></app-header>
-    <!-- <router-otlet></router-otlet> -->
-    <app-main></app-main>
-    <div class="scroll-buttons-container" *ngIf='showScrollButtons'>
-        <app-scroll-button direction='top' *ngIf='topScroll' (scrollTo)='scrollTo($event)'></app-scroll-button>
-        <app-scroll-button direction='bottom' *ngIf='bottomScroll' (scrollTo)='scrollTo($event)'></app-scroll-button>
+        <app-header></app-header>
+        <app-main></app-main>
+        <div class="scroll-buttons-container" *ngIf='showScrollButtons'>
+            <app-scroll-button *ngIf='topScroll'
+                direction='top'
+                (scrollTo)='scrollTo($event)'
+            ></app-scroll-button>
+            <app-scroll-button *ngIf='bottomScroll'
+                direction='bottom'
+                (scrollTo)='scrollTo($event)'
+            ></app-scroll-button>
+        </div>
+        <app-footer></app-footer>
     </div>
-    <app-footer></app-footer>
-</div>
 </div>

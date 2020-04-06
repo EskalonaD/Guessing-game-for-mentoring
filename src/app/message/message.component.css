@@ -1,22 +1,22 @@
 :host {
     margin: 10px;
-
     align-items: center;
     width: 500px;
     max-width: 70%;
-
     border-radius: 15px;
-
     background-color: rgb(165, 135, 121);
-
     overflow: hidden;
 }
 
+:host.guesser .loader {
+    color: rgb(252, 143, 228);
+}
+
 .user {
-    /* width: 200px; */
     padding: 5px;
     background-color: #fff;
 }
+
 img { 
     display: block;
     margin: 0 auto;
@@ -45,9 +45,4 @@ img {
     color: rgb(35, 102, 146);
     font-weight: normal;
 }
-
-:host.guesser .loader {
-    color: rgb(252, 143, 228);
-}
-
 
