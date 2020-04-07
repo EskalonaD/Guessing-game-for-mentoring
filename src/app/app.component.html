@@ -1,13 +1,16 @@
+<!-- add logic-wrapper component -->
 <div class="wrapper" #wrapper (scroll)='onScroll()'>
     <div #contentContainer>
         <app-header></app-header>
         <app-main></app-main>
         <div class="scroll-buttons-container" *ngIf='showScrollButtons'>
-            <app-scroll-button *ngIf='topScroll'
+            <app-scroll-button
+                [ngClass]="{ 'show': topScroll }"
                 direction='top'
                 (scrollTo)='scrollTo($event)'
             ></app-scroll-button>
-            <app-scroll-button *ngIf='bottomScroll'
+            <app-scroll-button
+                [ngClass]="{ 'show': bottomScroll }"
                 direction='bottom'
                 (scrollTo)='scrollTo($event)'
             ></app-scroll-button>

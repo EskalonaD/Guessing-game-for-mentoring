@@ -52,7 +52,7 @@ export class AppComponent implements AfterViewInit {
                         this.bottomScroll = false;
                     }
                     this.timeout = false;
-                }, 1000)
+                }, 1000)    //update time amount, set animation to 'hide' freezes?!
             }
         }
     }

@@ -23,3 +23,7 @@
     right: 15%;
     bottom: 20%;
 }
+
+.scroll-buttons-container .show {
+    visibility: visible;
+}
