@@ -14,4 +14,6 @@ export class StateService {
     secretNumber: number;
     guessedNumbers: number[] = [];
     shouldScroll: boolean = true;
+
+    //put messeges$ here and set gameservices chatlistener to listen to last element of messages$ array
 }
