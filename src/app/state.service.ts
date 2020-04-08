@@ -7,7 +7,7 @@ import { takeUntil, tap, scan } from 'rxjs/operators';
 })
 export class StateService {
 
-    unsubscriber$: Subject<any> = new Subject();
+    unsubscriber$: Subject<any> = new Subject(); // should remove it to component's unsubscribers
     chat$: Subject<any> = new Subject();
     isStarted: boolean;
     isEnded: boolean;

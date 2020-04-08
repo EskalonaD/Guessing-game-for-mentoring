@@ -1,1 +1,4 @@
-<button *ngIf='shouldShow' (click)='closeGame()'>Закончить игру</button>
+<div *ngIf='shouldShow'>
+    <button (click)='closeGame()'>Закончить игру</button>
+    <button (click)='restartGame()'>Перезапустить игру</button>
+</div>

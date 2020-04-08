@@ -18,11 +18,14 @@ export class GameService {
     chatListener$ = this.state.chat$.pipe(
         takeUntil(this.state.unsubscriber$),
         tap((data: { text: string, person: string, stop?: boolean }) => {
-            if (data.stop === true) return;
+            if (data.stop === true) {
+                this.state.isEnded = true;  // end messege should scroll to the footer, not just to last message;
+                return;
+            }
             const person = data.person === 'guesser' ? 'puzzler' : 'guesser';
             this[person].listenInterlocutor(data.text);
         })
-    ).subscribe();
+    ).subscribe(); // try to remove subscription or think how to unsubscribe/resubscribe when it need to.
 
     startGame(): void {
         this.state.isStarted = true;

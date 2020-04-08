@@ -35,11 +35,11 @@ export class AppComponent implements AfterViewInit {
 
     onScroll(): void {
         if (this.showScrollButtons) {
-            if (this.wrapper.nativeElement.scrollTop > 100) {
+            if (this.wrapper.nativeElement.scrollTop > 50) {
                 this.topScroll = true;
             }
 
-            if (this.wrapper.nativeElement.scrollTop < 100) {
+            if (this.wrapper.nativeElement.scrollTop < 50) {
                 this.topScroll = false;
             }
 
@@ -52,7 +52,7 @@ export class AppComponent implements AfterViewInit {
                         this.bottomScroll = false;
                     }
                     this.timeout = false;
-                }, 1000)    //update time amount, set animation to 'hide' freezes?!
+                }, 800)    //update time amount, set animation to 'hide' freezes?!
             }
         }
     }

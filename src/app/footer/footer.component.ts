@@ -22,4 +22,8 @@ export class FooterComponent implements OnInit {
     this.game.closeGame();
   }
 
+  restartGame(): void {
+    // this.game.restartGame()
+  }
+
 }
