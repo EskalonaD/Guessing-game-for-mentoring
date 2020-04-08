@@ -7,16 +7,11 @@ import { takeUntil, tap, scan } from 'rxjs/operators';
 })
 export class StateService {
 
-    unsubscriber$: Subject<any> = new Subject(); // should remove it to component's unsubscribers
+    // unsubscriber$: Subject<any> = new Subject(); // should remove it to component's unsubscribers
     chat$: Subject<any> = new Subject();
     isStarted: boolean;
     isEnded: boolean;
     secretNumber: number;
     guessedNumbers: number[] = [];
     shouldScroll: boolean = true;
-
-    messages$ = this.chat$.pipe(
-        takeUntil(this.unsubscriber$),
-        scan((acc, val) => acc.push(val) && acc, []),
-    )
 }

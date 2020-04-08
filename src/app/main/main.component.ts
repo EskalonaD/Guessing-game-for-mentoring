@@ -3,6 +3,8 @@ import { StateService } from '../state.service'
 import { GameService } from '../game.service';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { scan } from 'rxjs/operators';
+import { Message } from '../models';
 
 enum Scroll {
     'top',
@@ -17,7 +19,9 @@ enum Scroll {
 export class MainComponent implements OnInit {
 
     input: FormControl = new FormControl('');
-    messages$: Observable<any[]> = this.state.messages$;
+    messages$: Observable<any[]> = this.game.chatListener$.pipe(
+        scan((acc: any[], val: Message) => acc.push(val) && acc, []),
+    );
 
     constructor(private state: StateService, private game: GameService) { }
 

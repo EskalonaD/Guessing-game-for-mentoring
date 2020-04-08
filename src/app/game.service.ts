@@ -3,6 +3,7 @@ import { GuesserService } from './guesser.service';
 import { PuzzlerService } from './puzzler.service';
 import { StateService } from './state.service';
 import { takeUntil, tap } from 'rxjs/operators';
+import { Message } from './models';
 
 @Injectable({
     providedIn: 'root'
@@ -16,8 +17,8 @@ export class GameService {
     ) { }
 
     chatListener$ = this.state.chat$.pipe(
-        takeUntil(this.state.unsubscriber$),
-        tap((data: { text: string, person: string, stop?: boolean }) => {
+        // takeUntil(this.state.unsubscriber$),
+        tap((data: Message) => {
             if (data.stop === true) {
                 this.state.isEnded = true;  // end messege should scroll to the footer, not just to last message;
                 return;
@@ -25,7 +26,7 @@ export class GameService {
             const person = data.person === 'guesser' ? 'puzzler' : 'guesser';
             this[person].listenInterlocutor(data.text);
         })
-    ).subscribe(); // try to remove subscription or think how to unsubscribe/resubscribe when it need to.
+    )//.subscribe(); // Lisa, how should i handle it? subscribe or pass to be subscribed in components?
 
     startGame(): void {
         this.state.isStarted = true;

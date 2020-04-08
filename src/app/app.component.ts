@@ -1,8 +1,8 @@
-import { Component, ViewChild, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, Renderer2, AfterViewInit, OnDestroy } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
 import { StateService } from './state.service';
 import { takeUntil } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
 
 @Component({
     selector: 'app-root',
@@ -10,18 +10,19 @@ import { Subscription } from 'rxjs';
     styleUrls: ['./app.component.css'],
     encapsulation: ViewEncapsulation.None
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements AfterViewInit, OnDestroy {
     title = 'game2';
 
     @ViewChild('contentContainer', { static: false }) contentContainer: ElementRef;
     @ViewChild('wrapper', { static: false }) wrapper: ElementRef;
 
+    private unsubscriber$: Subject<any> = new Subject();
     showScrollButtons: boolean = false;
     topScroll: boolean = false;
     bottomScroll: boolean = false; 
     timeout: any;
     scrollButtonUpdaterOnMessegeCreation$: Subscription = this.state.chat$.pipe(
-        takeUntil(this.state.unsubscriber$),
+        takeUntil(this.unsubscriber$),
     ).subscribe(_ => this.onScroll());
 
     constructor(private state: StateService, private renderer: Renderer2) { }
@@ -31,6 +32,11 @@ export class AppComponent implements AfterViewInit {
             this.showScrollButtons = true;
             onScroll();
         });
+    }
+
+    ngOnDestroy() {
+        this.unsubscriber$.next();
+        this.unsubscriber$.complete();
     }
 
     onScroll(): void {
