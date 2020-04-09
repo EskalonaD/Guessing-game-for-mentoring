@@ -2,7 +2,8 @@
 <div class="wrapper" #wrapper (scroll)='onScroll()'>
     <div #contentContainer>
         <app-header></app-header>
-        <app-main></app-main>
+        <!-- use componentFactoryResolver to 'refresh game', mby create too adding main component dynamically (rename it) -->
+        <app-main *ngIf='gameStarted'></app-main>
         <div class="scroll-buttons-container" *ngIf='showScrollButtons'>
             <app-scroll-button
                 [ngClass]="{ 'show': topScroll }"

@@ -18,8 +18,8 @@ export class FooterComponent implements OnInit {
     return this.state.isEnded;
   }
 
-  endGame(): void {
-    this.game.closeGame();
+  closeGame(): void {
+    this.game.endGame();
   }
 
   restartGame(): void {

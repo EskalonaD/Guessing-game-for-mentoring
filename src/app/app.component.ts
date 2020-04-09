@@ -39,6 +39,11 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         this.unsubscriber$.complete();
     }
 
+    get gameStarted(): boolean {
+        console.log('isStarted', this.state.isStarted)
+        return this.state.isStarted;
+    }
+
     onScroll(): void {
         if (this.showScrollButtons) {
             if (this.wrapper.nativeElement.scrollTop > 50) {

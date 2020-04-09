@@ -20,7 +20,7 @@ export class GameService {
         // takeUntil(this.state.unsubscriber$),
         tap((data: Message) => {
             if (data.stop === true) {
-                this.state.isEnded = true;  // end messege should scroll to the footer, not just to last message;
+                this.finishGame();  // end messege should scroll to the footer, not just to last message;
                 return;
             }
             const person = data.person === 'guesser' ? 'puzzler' : 'guesser';
@@ -37,11 +37,11 @@ export class GameService {
         this.guesser.firstGuess();
     }
 
-    endGame(): void {
+    private finishGame(): void {
         this.state.isEnded = true;
     }
 
-    closeGame(): void {
+    endGame(): void {
         this.state.isStarted = false;
         this.state.isEnded = false;
     }
