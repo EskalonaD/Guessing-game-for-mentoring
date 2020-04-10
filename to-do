@@ -1,9 +1,11 @@
 update onwheel to, when rich the scrollend restart scrolling on message creation;
 when game ends scroll to bottom;
-add footer styles;
 add scroll on fixed element feature;
 try to replace stateService booleans to HOF methods (try to remove getters);
 submit on inputs enter click;
+
+move to scss???
+fix header/form css???
 
 separate one game view from another;
 
