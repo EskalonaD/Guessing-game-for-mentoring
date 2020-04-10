@@ -14,28 +14,29 @@ import { GameService } from './game.service';
     encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements AfterViewInit, OnDestroy {
-    title = 'game2';
-
-    @ViewChild('contentContainer', { static: false }) contentContainer: ElementRef;
-    @ViewChild('wrapper', { static: false }) wrapper: ElementRef;
-    @ViewChild(GameAnchorDirective, { static: true }) gameContainer: GameAnchorDirective; //check why static true;
-
-    private unsubscriber$: Subject<any> = new Subject();
-    private GameComponent = MainComponent;// rename
-    showScrollButtons: boolean = false;
-    topScroll: boolean = false;
-    bottomScroll: boolean = false;
-    timeout: any;
-    scrollButtonUpdaterOnMessegeCreation$: Subscription = this.state.chat$.pipe(
-        takeUntil(this.unsubscriber$),
-    ).subscribe(_ => this.onScroll());
-
     constructor(
         private state: StateService,
         private renderer: Renderer2,
         private resolver: ComponentFactoryResolver,
-        private game: GameService
-        ) { }
+    ) { }
+
+    title = 'game2';
+
+    @ViewChild('contentContainer', { static: false }) private contentContainer: ElementRef;
+    @ViewChild('wrapper', { static: false }) private wrapper: ElementRef;
+    @ViewChild(GameAnchorDirective, { static: true }) gameContainer: GameAnchorDirective; //check why static true;
+
+    private unsubscriber$: Subject<void> = new Subject<void>();
+    private GameComponent: typeof MainComponent = MainComponent;// rename
+    private timeout: any;
+
+    showScrollButtons: boolean = false;
+    topScroll: boolean = false;
+    bottomScroll: boolean = false;
+    scrollButtonUpdaterOnMessegeCreation$: Subscription = this.state.chat$.pipe(
+        takeUntil(this.unsubscriber$),
+    ).subscribe(_ => this.onScroll());
+
 
     ngAfterViewInit() {
         const onScroll = this.renderer.listen(this.wrapper.nativeElement, 'scroll', () => {
@@ -43,24 +44,21 @@ export class AppComponent implements AfterViewInit, OnDestroy {
             onScroll();
         });
 
-                    // hack to restore messages scrollintoview when fully scrolled
-                    // update to use deltaY property for defining direction/place of 'wheel-end' event
-                    //fix problem
-        const maxWheelHack = this.renderer.listen(this.wrapper.nativeElement, 'wheel', () => {
+        // hack to restore messages scrollintoview when fully scrolled
+        // update to use deltaY property for defining direction/place of 'wheel-end' event
+        //fix problem
+        this.renderer.listen(this.wrapper.nativeElement, 'wheel', () => {
             if (this.wrapper.nativeElement.scrollHeight !== this.wrapper.nativeElement.clientHeight) {
                 if (this.state.shouldScroll) {
                     this.state.shouldScroll = false;
                     return;
                 }
 
-                if(this.wrapper.nativeElement.scrollTop === this.wrapper.nativeElement.scrollHeight - this.wrapper.nativeElement.clientHeight) {
-                    console.log('here');
-                    
+                if (this.wrapper.nativeElement.scrollTop === this.wrapper.nativeElement.scrollHeight - this.wrapper.nativeElement.clientHeight) {
                     this.state.shouldScroll = true;
                 }
             }
-        })
-            // if/(this.)
+        });
     }
 
     ngOnDestroy() {
@@ -99,25 +97,10 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         // change variables names;
         const componentFactory = this.resolver.resolveComponentFactory(this.GameComponent);
         const viewContainerRef = this.gameContainer.viewRef; // check what exactly is viewContainerRef and another Refs(elementref, componentref etc);
-        /**
-         *  set reference to include componentRef to state.gamesStorage
-         *    const componentRef =
-         */
-
         viewContainerRef.createComponent(componentFactory);
-
-        /**
-         * this.state.gamesStorage.push(componentRef);
-         */
     }
 
     endGame(): void {
-        /**
-         *   could be replaced with ng-container with ngIf directive... but leave it as is for learning purpose;
-         *   coulld be replaced with store of componentrefs of dynamicly created components. We can run through them and invoke destroy() method;
-         *   this.game.destroyExistingGames();
-         */
-
         this.gameContainer.viewRef.clear()
     }
 

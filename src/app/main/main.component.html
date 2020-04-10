@@ -1,19 +1,19 @@
 <div class="main-wrapper" #wrapper>
-    <div class='number-saver'>
+    <div class="number-saver">
         <p>What number should I remember?</p>
         <input
-            type='number'
-            [formControl]='input'
-        ><button (click)='setSecretNumber(input.value)'>
+            type="number"
+            [formControl]="input"
+        ><button (click)="setSecretNumber(input.value)">
             ok
         </button>
     </div>
-    <div class='message-wrapper'>
-        <div *ngIf='messages$ | async as messages'>
-            <app-message *ngFor='let message of messages'
-                [message]='message'
-                [ngClass]='message.person'
-                [appScroll]='shouldScroll'
+    <div class="message-wrapper">
+        <div *ngIf="messages$ | async as messages">
+            <app-message *ngFor="let message of messages"
+                [message]="message"
+                [ngClass]="message.person"
+                [appScroll]="shouldScroll"
             ></app-message>
         </div>
     </div>

@@ -1,13 +1,11 @@
 update onwheel to, when rich the scrollend restart scrolling on message creation;
-clean app from logs & unnecessary comments;
 when game ends scroll to bottom;
 add footer styles;
 add scroll on fixed element feature;
 try to replace stateService booleans to HOF methods (try to remove getters);
-use contentChildren instead of stateServices gamesStorage;
+submit on inputs enter click;
 
 separate one game view from another;
-create learning-branch move documentation comments there;
 
 fix problem with onwheel event... move it to hostlistener??
 
@@ -16,4 +14,11 @@ start game should scroll to bottom;
 change mainComponent name;
 disable buttons/inputs after choice;
 add readme-file;
+
+
+
+
+
+
 remove to-do-file;
+final clean-up;

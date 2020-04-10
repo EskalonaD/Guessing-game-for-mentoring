@@ -1,8 +1,8 @@
-<div class='user'>
-    <img class="logo" [src]='logoURL'>
+<div class="user">
+    <img class="logo" [src]="logoURL">
     <p class="nickname">{{ message.person }}</p>
 </div>
-<div class="loader" *ngIf='showLoader; else messageBlock'>{{message.person}} typing...</div>
+<div class="loader" *ngIf="showLoader; else messageBlock">{{message.person}} typing...</div>
 <ng-template #messageBlock>
-    <div class="message" >{{ message.text }}</div>
+    <div class="message">{{ message.text }}</div>
 </ng-template>

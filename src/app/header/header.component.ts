@@ -8,10 +8,9 @@ import { GameService } from '../game.service';
     styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+    constructor(private state: StateService, private game: GameService) { }
 
     @Output() private start: EventEmitter<any> = new EventEmitter;
-
-    constructor(private state: StateService, private game: GameService) { }
 
     ngOnInit() {
     }

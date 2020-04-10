@@ -17,10 +17,11 @@ enum Scroll {
     styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit, OnDestroy {
+    constructor(private state: StateService, private game: GameService) { }
 
-    // @Output() startAnotherOne: EventEmitter<void> = new EventEmitter<void>();
     private unsubscriber$: Subject<any> = new Subject;
-    input: FormControl = new FormControl('');
+
+    input: FormControl = new FormControl('');   //check if private flag can be used instead public
     messages$: Observable<any[]> = this.game.chatListener$.pipe(
         takeUntil(this.unsubscriber$),
         scan((acc: any[], val: Message) => {
@@ -33,30 +34,19 @@ export class MainComponent implements OnInit, OnDestroy {
         }, []),
     );
 
-    constructor(private state: StateService, private game: GameService) { }
+    get shouldScroll(): boolean {
+        return this.state.shouldScroll;
+    }
 
     ngOnInit() {
     }
 
     ngOnDestroy() {
-        console.log('destroyed');
         this.unsubscriber$.next();
         this.unsubscriber$.complete();
-    }
-
-    get shouldScroll(): boolean {
-        return this.state.shouldScroll;
     }
 
     setSecretNumber(input: string): void {
         this.game.setGameParameters(+input)
     }
-
-    // @HostListener('wheel') scollHandler(): void {
-    //     console.log(1);
-        
-    //     if (this.state.shouldScroll) {
-    //         this.state.shouldScroll = false;
-    //     }
-    // }
 }

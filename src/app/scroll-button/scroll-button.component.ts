@@ -6,10 +6,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
     styleUrls: ['./scroll-button.component.css']
 })
 export class ScrollButtonComponent implements OnInit {
-    @Input() direction: 'top' | 'bottom';
-    @Output() scrollTo = new EventEmitter();
-
     constructor() { }
+
+    @Input() direction: 'top' | 'bottom';
+    @Output() private scrollTo: EventEmitter<'top' | 'bottom'> = new EventEmitter<'top' | 'bottom'>();
 
     arrowDirection = {
         top: '&#8648;',
@@ -19,7 +19,7 @@ export class ScrollButtonComponent implements OnInit {
     ngOnInit() {
     }
 
-    onClick() {
+    onClick(): void {
         this.scrollTo.emit(this.direction);
     }
 }

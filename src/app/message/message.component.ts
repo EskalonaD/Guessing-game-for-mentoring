@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Message } from '../models';
 
 @Component({
     selector: 'app-message',
@@ -6,17 +7,16 @@ import { Component, OnInit, Input } from '@angular/core';
     styleUrls: ['./message.component.css']
 })
 export class MessageComponent implements OnInit {
+    constructor() { }
 
-    get logoURL(): string {
-        return this.message.person === 'puzzler'
+    @Input() message: Message;
+    showLoader: boolean = false;
+
+    get logoURL(): string { //check if getter is needed instead of regular property
+        return this.message.person === 'puzzler'        // use object-mapper instead
             ? 'https://avatarfiles.alphacoders.com/715/71560.jpg'
             : 'https://avatarfiles.alphacoders.com/114/114469.png'
     }
-
-    constructor() { }
-
-    @Input() message: { text: string, person: 'puzzler' | 'guesser', stop?: boolean };
-    showLoader: boolean = false;
 
     ngOnInit() {
         this.showLoader = true;

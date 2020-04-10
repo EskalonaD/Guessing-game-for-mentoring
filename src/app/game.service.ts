@@ -10,7 +10,6 @@ import { MainComponent } from './main/main.component';
     providedIn: 'root'
 })
 export class GameService {
-
     constructor(
         private guesser: GuesserService,
         private puzzler: PuzzlerService,
@@ -18,7 +17,6 @@ export class GameService {
     ) { }
 
     chatListener$ = this.state.chat$.pipe(
-        // takeUntil(this.state.unsubscriber$),
         tap((data: Message) => {
             if (data.stop === true) {
                 this.finishGame();  // end messege should scroll to the footer, not just to last message;
@@ -28,10 +26,6 @@ export class GameService {
             this[person].listenInterlocutor(data.text);
         })
     )//.subscribe(); // Lisa, how should i handle it? subscribe or pass to be subscribed in components?
-
-    // startGame(): void {
-    //     this.state.isStarted = true;
-    // }
 
     setGameParameters(secret: number): void {
         this.puzzler.rememberNumber(secret);
@@ -43,16 +37,6 @@ export class GameService {
     }
 
     endGame(): void {
-        // this.state.isStarted = false;
         this.state.isEnded = false;
     }
-
-    /**
-     *   destroyExistingGames() {
-     *      this.state.gamesStorage.forEach((el: ComponentRef<MainComponent>) => {
-     *          el.destroy();
-     *      })
-     *   }
-     */
-
 }
