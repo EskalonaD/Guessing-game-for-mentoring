@@ -1,0 +1,11 @@
+update onwheel to, when rich the scrollend restart scrolling on message creation;
+clean app from logs & unnecessary comments;
+when game ends scroll to bottom;
+add footer styles;
+
+create wrapper component;
+start game should scroll to bottom;
+change mainComponent name;
+disable buttons/inputs after choice;
+add readme-file;
+remove to-do-file;

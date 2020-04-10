@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { StateService } from '../state.service';
 import { GameService } from '../game.service';
 
@@ -8,6 +8,8 @@ import { GameService } from '../game.service';
     styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+
+    @Output() private start: EventEmitter<any> = new EventEmitter;
 
     constructor(private state: StateService, private game: GameService) { }
 
@@ -19,6 +21,7 @@ export class HeaderComponent implements OnInit {
     }
 
     startGame(): void {
-        this.game.startGame();
+        this.state.isStarted; // remove
+        this.start.emit();
     }
 }

@@ -46,7 +46,10 @@ export class GuesserService {
     }
 
     listenInterlocutor(message: string): void {
-        if (message === 'You are right!') return this.guess('match');
+        if (message === 'You are right!') {
+            this.state.guessedNumbers = [];
+            return this.guess('match');
+        };
         const meaningfulInfo = message.includes('more') ? 'more' : 'less';
         this.guess(meaningfulInfo);
     }

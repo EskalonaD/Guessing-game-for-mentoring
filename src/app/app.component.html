@@ -1,9 +1,8 @@
 <!-- add logic-wrapper component -->
 <div class="wrapper" #wrapper (scroll)='onScroll()'>
     <div #contentContainer>
-        <app-header></app-header>
-        <!-- use componentFactoryResolver to 'refresh game', mby create too adding main component dynamically (rename it) -->
-        <app-main *ngIf='gameStarted'></app-main>
+        <app-header (start)='startGame()'></app-header>
+        <template appGameAnchor></template>
         <div class="scroll-buttons-container" *ngIf='showScrollButtons'>
             <app-scroll-button
                 [ngClass]="{ 'show': topScroll }"
@@ -16,6 +15,9 @@
                 (scrollTo)='scrollTo($event)'
             ></app-scroll-button>
         </div>
-        <app-footer></app-footer>
+        <app-footer 
+        (startAnotherGame)='startGame()'
+        (endGame)='endGame()'
+        ></app-footer>
     </div>
 </div>

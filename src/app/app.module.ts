@@ -9,6 +9,7 @@ import { MainComponent } from './main/main.component';
 import { MessageComponent } from './message/message.component';
 import { ScrollDirective } from './scroll.directive';
 import { ScrollButtonComponent } from './scroll-button/scroll-button.component';
+import { GameAnchorDirective } from './game-anchor.directive';
 
 
 @NgModule({
@@ -19,13 +20,17 @@ import { ScrollButtonComponent } from './scroll-button/scroll-button.component';
     MainComponent,
     MessageComponent,
     ScrollDirective,
-    ScrollButtonComponent
+    ScrollButtonComponent,
+    GameAnchorDirective
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
   ],
   providers: [
+  ],
+  entryComponents: [
+    MainComponent,
   ],
   bootstrap: [AppComponent]
 })

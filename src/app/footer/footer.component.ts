@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { StateService } from '../state.service';
 import { GameService } from '../game.service';
 
@@ -8,6 +8,8 @@ import { GameService } from '../game.service';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
+  @Output()  private startAnotherGame: EventEmitter<void> = new EventEmitter<void>();
+  @Output()  private endGame: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(private state: StateService, private game: GameService) { }
 
@@ -19,11 +21,13 @@ export class FooterComponent implements OnInit {
   }
 
   closeGame(): void {
-    this.game.endGame();
+    this.game.endGame(); //remove?
+    this.endGame.emit();
   }
 
   restartGame(): void {
-    // this.game.restartGame()
+    // this.game.restartGame() //remove
+    this.startAnotherGame.emit();
   }
 
 }
