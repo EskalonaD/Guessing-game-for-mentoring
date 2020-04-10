@@ -4,6 +4,7 @@ when game ends scroll to bottom;
 add footer styles;
 add scroll on fixed element feature;
 try to replace stateService booleans to HOF methods (try to remove getters);
+use contentChildren instead of stateServices gamesStorage;
 
 create wrapper component;
 start game should scroll to bottom;
