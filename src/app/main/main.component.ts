@@ -52,9 +52,11 @@ export class MainComponent implements OnInit, OnDestroy {
         this.game.setGameParameters(+input)
     }
 
-    @HostListener('wheel') scollHandler(): void {
-        if (this.state.shouldScroll) {
-            this.state.shouldScroll = false;
-        }
-    }
+    // @HostListener('wheel') scollHandler(): void {
+    //     console.log(1);
+        
+    //     if (this.state.shouldScroll) {
+    //         this.state.shouldScroll = false;
+    //     }
+    // }
 }

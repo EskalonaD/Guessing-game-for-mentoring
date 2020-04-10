@@ -24,31 +24,49 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     private GameComponent = MainComponent;// rename
     showScrollButtons: boolean = false;
     topScroll: boolean = false;
-    bottomScroll: boolean = false; 
+    bottomScroll: boolean = false;
     timeout: any;
     scrollButtonUpdaterOnMessegeCreation$: Subscription = this.state.chat$.pipe(
         takeUntil(this.unsubscriber$),
     ).subscribe(_ => this.onScroll());
-    
 
-    constructor(private state: StateService, private renderer: Renderer2, private resolver: ComponentFactoryResolver, private game: GameService) { }
+    constructor(
+        private state: StateService,
+        private renderer: Renderer2,
+        private resolver: ComponentFactoryResolver,
+        private game: GameService
+        ) { }
 
     ngAfterViewInit() {
         const onScroll = this.renderer.listen(this.wrapper.nativeElement, 'scroll', () => {
             this.showScrollButtons = true;
             onScroll();
         });
+
+                    // hack to restore messages scrollintoview when fully scrolled
+                    // update to use deltaY property for defining direction/place of 'wheel-end' event
+                    //fix problem
+        const maxWheelHack = this.renderer.listen(this.wrapper.nativeElement, 'wheel', () => {
+            if (this.wrapper.nativeElement.scrollHeight !== this.wrapper.nativeElement.clientHeight) {
+                if (this.state.shouldScroll) {
+                    this.state.shouldScroll = false;
+                    return;
+                }
+
+                if(this.wrapper.nativeElement.scrollTop === this.wrapper.nativeElement.scrollHeight - this.wrapper.nativeElement.clientHeight) {
+                    console.log('here');
+                    
+                    this.state.shouldScroll = true;
+                }
+            }
+        })
+            // if/(this.)
     }
 
     ngOnDestroy() {
         this.unsubscriber$.next();
         this.unsubscriber$.complete();
     }
-
-    // get gameStarted(): boolean {
-    //     console.log('isStarted', this.state.isStarted)
-    //     return this.state.isStarted;
-    // }
 
     onScroll(): void {
         if (this.showScrollButtons) {
@@ -71,21 +89,36 @@ export class AppComponent implements AfterViewInit, OnDestroy {
                     this.timeout = false;
                 }, 800)    //update time amount, set animation to 'hide' freezes?!
             }
+
+
         }
     }
 
-    startGame() {
+    startGame(): void {
         this.state.isEnded = false;
         // change variables names;
         const componentFactory = this.resolver.resolveComponentFactory(this.GameComponent);
-        const viewContainerRef = this.gameContainer.viewRef; // check what exactly is viewContainerRef and another Refs;
-        const componentRef = viewContainerRef.createComponent(componentFactory);
-        this.state.gamesStorage.push(componentRef);
+        const viewContainerRef = this.gameContainer.viewRef; // check what exactly is viewContainerRef and another Refs(elementref, componentref etc);
+        /**
+         *  set reference to include componentRef to state.gamesStorage
+         *    const componentRef =
+         */
+
+        viewContainerRef.createComponent(componentFactory);
+
+        /**
+         * this.state.gamesStorage.push(componentRef);
+         */
     }
 
-    endGame() {
-        // could be replaced with ng-container with ngIf directive... but leave it as is for learning purpose;
-        this.game.destroyExistingGames();
+    endGame(): void {
+        /**
+         *   could be replaced with ng-container with ngIf directive... but leave it as is for learning purpose;
+         *   coulld be replaced with store of componentrefs of dynamicly created components. We can run through them and invoke destroy() method;
+         *   this.game.destroyExistingGames();
+         */
+
+        this.gameContainer.viewRef.clear()
     }
 
     scrollTo(way: string): void {

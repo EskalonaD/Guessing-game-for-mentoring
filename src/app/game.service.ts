@@ -46,9 +46,13 @@ export class GameService {
         // this.state.isStarted = false;
         this.state.isEnded = false;
     }
-    destroyExistingGames() {
-        this.state.gamesStorage.forEach((el: ComponentRef<MainComponent>) => {
-            el.destroy();
-        })
-    }
+
+    /**
+     *   destroyExistingGames() {
+     *      this.state.gamesStorage.forEach((el: ComponentRef<MainComponent>) => {
+     *          el.destroy();
+     *      })
+     *   }
+     */
+
 }

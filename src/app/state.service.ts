@@ -15,7 +15,9 @@ export class StateService {
     secretNumber: number;
     guessedNumbers: number[] = [];
     shouldScroll: boolean = true;
-    gamesStorage: ComponentRef<MainComponent>[] = [];
+    /**
+     *     gamesStorage: ComponentRef<MainComponent>[] = [];
+     */
 
-    //put messeges$ here and set gameservices chatlistener to listen to last element of messages$ array
+    // ?? put messeges$ here and set gameservices chatlistener to listen to last element of messages$ array
 }

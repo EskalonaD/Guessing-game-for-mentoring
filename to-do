@@ -6,6 +6,11 @@ add scroll on fixed element feature;
 try to replace stateService booleans to HOF methods (try to remove getters);
 use contentChildren instead of stateServices gamesStorage;
 
+separate one game view from another;
+create learning-branch move documentation comments there;
+
+fix problem with onwheel event... move it to hostlistener??
+
 create wrapper component;
 start game should scroll to bottom;
 change mainComponent name;
