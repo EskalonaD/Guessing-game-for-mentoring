@@ -4,6 +4,12 @@ add scroll on fixed element feature;
 try to replace stateService booleans to HOF methods (try to remove getters);
 submit on inputs enter click;
 
+
+/** business logic
+???update business logic to increase bot's inteligence [peak points logic];
+move startGame input to messageBox;
+add animation to 'spinner'
+
 move to scss???
 fix header/form css???
 

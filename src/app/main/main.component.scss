@@ -1,0 +1,32 @@
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .number-saver {
+        text-align: right;
+        min-height: 100px;
+    }
+
+    .message-wrapper {
+        flex-basis: 80%;
+        flex-grow: 1;
+        overflow: hidden;
+
+        .puzzler {
+            display: flex;
+            flex-direction: row-reverse;
+            margin-left: auto;
+            font-weight: bold;
+            border: 2px solid rgb(16, 191, 214);
+        }
+
+        .guesser {
+            display: flex;
+            flex-direction: row;
+            margin-right: auto;
+            background-color: rgb(3, 3, 99);
+            border: 2px solid rgb(73, 13, 60);
+            color: rgb(235, 233, 233);
+        }
+    }
+}

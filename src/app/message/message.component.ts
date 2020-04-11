@@ -4,7 +4,7 @@ import { Message } from '../models';
 @Component({
     selector: 'app-message',
     templateUrl: './message.component.html',
-    styleUrls: ['./message.component.css']
+    styleUrls: ['./message.component.scss']
 })
 export class MessageComponent implements OnInit {
     constructor() { }
