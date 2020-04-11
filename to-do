@@ -1,32 +1,37 @@
-update onwheel to, when rich the scrollend restart scrolling on message creation;
-when game ends scroll to bottom;
-add scroll on fixed element feature;
-try to replace stateService booleans to HOF methods (try to remove getters);
-submit on inputs enter click;
-
-
-/** business logic
-???update business logic to increase bot's inteligence [peak points logic];
-move startGame input to messageBox;
+/** view
+make input pretty
 add animation to 'spinner'
-
-move to scss???
+add scroll on fixed element feature;
+separate one game view from another;
 fix header/form css???
 
-separate one game view from another;
-
-fix problem with onwheel event... move it to hostlistener??
-
-create wrapper component;
-start game should scroll to bottom;
-change mainComponent name;
+/** business logic
+submit on inputs enter click;
+when game ends scroll to bottom;
+update onwheel to, when rich the scrollend restart scrolling on message creation;
+???update business logic to increase bot's inteligence [peak points logic];
+move startGame input to messageBox;
+start game should scroll to bottom (maybe related to previous task);
+switch numbersavings to logic trio: previous way => step => peaks;
 disable buttons/inputs after choice;
+
+/**internal logic
+move state to rxjs;
+let scroll-down-button depends on state.shouldScroll (change name to messageShouldScroll) instead of html.scrollHeight
+remove getters for propertys assigned via streams;
+fix problem with onwheel event... move it to hostlistener??
+create wrapper component;
+change mainComponent name;
+
+/** final changes
 add readme-file;
-
-
-
-
-
-
 remove to-do-file;
 final clean-up;
+
+
+
+
+
+
+
+

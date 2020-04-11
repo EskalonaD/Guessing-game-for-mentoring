@@ -78,6 +78,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
             if (!this.timeout) {
                 this.timeout = setTimeout(() => {
+                    // TODO: use contentContainer instead of wrapper????
                     if (this.wrapper.nativeElement.scrollTop < this.wrapper.nativeElement.scrollHeight - this.wrapper.nativeElement.clientHeight - 20) {
                         this.bottomScroll = true;
                     }
