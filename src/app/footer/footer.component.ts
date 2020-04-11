@@ -3,29 +3,34 @@ import { StateService } from '../state.service';
 import { GameService } from '../game.service';
 
 @Component({
-  selector: 'app-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+    selector: 'app-footer',
+    templateUrl: './footer.component.html',
+    styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
-  @Output()  private startAnotherGame: EventEmitter<void> = new EventEmitter<void>();
-  @Output()  private endGame: EventEmitter<void> = new EventEmitter<void>();
+    constructor(private state: StateService, private game: GameService) { }
 
-  constructor(private state: StateService, private game: GameService) { }
+    @Output() private startAnotherGame: EventEmitter<void> = new EventEmitter<void>();
+    @Output() private endGame: EventEmitter<void> = new EventEmitter<void>();
 
-  ngOnInit() {
-  }
+    // shouldShow: boolean;
 
-  get shouldShow(): boolean {
-    return this.state.isEnded;
-  }
+    ngOnInit() {
+        // this.state.isEnded$.pipe(
+        //     take
+        // )
+    }
 
-  closeGame(): void {
-    this.game.endGame(); //remove?
-    this.endGame.emit();
-  }
+    // get shouldShow(): boolean {         //move show logic to parent smart-component;
+    //     return this.state.isEnded;
+    // }
 
-  restartGame(): void {
-    this.startAnotherGame.emit();
-  }
+    closeGame(): void {
+        this.game.endGame(); //remove?      // if needed move logic to parent smart-component;
+        this.endGame.emit();
+    }
+
+    restartGame(): void {
+        this.startAnotherGame.emit();
+    }
 }

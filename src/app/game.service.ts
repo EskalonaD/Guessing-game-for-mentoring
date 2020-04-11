@@ -33,10 +33,12 @@ export class GameService {
     }
 
     private finishGame(): void {
-        this.state.isEnded = true;
+        this.state.isEnded$.next(true);
+        // this.state.isEnded = true;   //remove
     }
 
     endGame(): void {
-        this.state.isEnded = false;
+        this.state.isEnded$.next(false);
+        // this.state.isEnded = false;  //remove
     }
 }

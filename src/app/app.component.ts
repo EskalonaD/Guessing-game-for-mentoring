@@ -26,11 +26,11 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         private state: StateService,
         private renderer: Renderer2,
         private resolver: ComponentFactoryResolver,
-    ) { }
+        ) { }
 
-    title = 'game2';
-
-    @ViewChild('contentContainer', { static: false }) private contentContainer: ElementRef;
+        title = 'game2';
+        
+        @ViewChild('contentContainer', { static: false }) private contentContainer: ElementRef;
     @ViewChild('wrapper', { static: false }) private wrapper: ElementRef;
     @ViewChild(GameAnchorDirective, { static: true }) gameContainer: GameAnchorDirective; //check why static true;
 
@@ -38,6 +38,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     private GameComponent: typeof MainComponent = MainComponent;// rename
     private shouldUpdateMessageShouldScroll: boolean;
 
+    showFooter: boolean;
     showScrollButtons: boolean = false;
     showScrollTopButton: boolean = false;
     showScrollBottomButton: boolean = false;
@@ -46,6 +47,10 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     ).subscribe(_ => this.onScroll());
 
     ngOnInit() {
+        this.state.isEnded$.pipe(
+            takeUntil(this.unsubscriber$),
+        ).subscribe(boolean => this.showFooter = boolean);
+
         this.state.messageShouldScroll$
             .pipe(
                 takeUntil(this.unsubscriber$),
@@ -96,7 +101,9 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     startGame(): void {
-        this.state.isEnded = false;
+        this.state.isEnded$.next(false);
+        // this.state.isEnded = false; // remove
+
         // change variables names;
         const componentFactory = this.resolver.resolveComponentFactory(this.GameComponent);
         const viewContainerRef = this.gameContainer.viewRef; // check what exactly is viewContainerRef and another Refs(elementref, componentref etc);
@@ -118,4 +125,5 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             this.contentContainer.nativeElement.scrollIntoView({ block: 'end', behavior: 'smooth' });
         }
     }
+
 }

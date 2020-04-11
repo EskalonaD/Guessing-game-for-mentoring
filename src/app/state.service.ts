@@ -6,13 +6,16 @@ import { Subject } from 'rxjs';
 })
 export class StateService {
     //should i unsubscribe/resubscribe?
-    chat$: Subject<any> = new Subject(); 
-    messageShouldScroll$: Subject<boolean> = new Subject();
+    chat$: Subject<any> = new Subject(); // change any-type to proper type;
+    messageShouldScroll$: Subject<boolean> = new Subject<boolean>();
+    isEnded$: Subject<boolean> = new Subject<boolean>();
     isStarted: boolean; //remove
-    isEnded: boolean;
     secretNumber: number;
     guessedNumbers: number[] = [];
-    // messageShouldScroll: boolean = true;    //remove
     
+    
+    // isEnded: boolean;
+    // messageShouldScroll: boolean = true;    //remove
+
     // ?? put messeges$ here and set gameservices chatlistener to listen to last element of messages$ array
 }
