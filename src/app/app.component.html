@@ -5,12 +5,12 @@
         <template appGameAnchor></template>
         <div class="scroll-buttons-container" *ngIf="showScrollButtons">
             <app-scroll-button
-                [ngClass]="{ 'show': topScroll }"
+                [ngClass]="{ 'show': showScrollTopButton }"
                 direction="top"
                 (scrollTo)="scrollTo($event)"
             ></app-scroll-button>
             <app-scroll-button
-                [ngClass]="{ 'show': bottomScroll }"
+                [ngClass]="{ 'show': showScrollBottomButton }"
                 direction="bottom"
                 (scrollTo)="scrollTo($event)"
             ></app-scroll-button>

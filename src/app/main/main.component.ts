@@ -6,10 +6,10 @@ import { Observable, Subject } from 'rxjs';
 import { scan, takeUntil } from 'rxjs/operators';
 import { Message } from '../models';
 
-enum Scroll {
-    'top',
-    'bottom'
-}
+// enum Scroll {
+//     'top',
+//     'bottom'
+// }
 
 @Component({
     selector: 'app-main',
@@ -21,11 +21,13 @@ export class MainComponent implements OnInit, OnDestroy {
 
     private unsubscriber$: Subject<any> = new Subject;
 
+    shouldScroll: boolean;
     input: FormControl = new FormControl('');   //check if private flag can be used instead public
     messages$: Observable<any[]> = this.game.chatListener$.pipe(
         takeUntil(this.unsubscriber$),
         scan((acc: any[], val: Message) => {
             if (val.stop) {
+                this.state.messageShouldScroll$.next(false);
                 this.unsubscriber$.next();
                 this.unsubscriber$.complete();
             }
@@ -34,11 +36,15 @@ export class MainComponent implements OnInit, OnDestroy {
         }, []),
     );
 
-    get shouldScroll(): boolean {
-        return this.state.shouldScroll;
-    }
+    // get shouldScroll(): boolean {
+    //     return this.state.messageShouldScroll;
+    // }
 
     ngOnInit() {
+        this.shouldScroll = true;
+        this.state.messageShouldScroll$.pipe(
+            takeUntil(this.unsubscriber$),
+        ).subscribe(x => this.shouldScroll = x)
     }
 
     ngOnDestroy() {

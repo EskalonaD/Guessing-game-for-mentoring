@@ -1,9 +1,10 @@
 /** view
-make input pretty
+make input pretty (use scss variable to sure that label will always fit input height??)
 add animation to 'spinner'
 add scroll on fixed element feature;
 separate one game view from another;
 fix header/form css???
+check if scroll buttons block doesn't hide when there is no scroll
 
 /** business logic
 submit on inputs enter click;
@@ -22,6 +23,7 @@ remove getters for propertys assigned via streams;
 fix problem with onwheel event... move it to hostlistener??
 create wrapper component;
 change mainComponent name;
+move initialization to ngOnInit method;
 
 /** final changes
 add readme-file;
