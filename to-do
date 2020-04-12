@@ -9,7 +9,6 @@ add transition to scroll-buttons appearence??
 
 /** business logic issues
 submit on inputs enter click;
-update onwheel to, when rich the scrollend restart scrolling on message creation; (deltaY)
 ???update business logic to increase bot's inteligence [peak points logic];
 move startGame input to messageBox;
 start game should scroll to bottom (maybe related to previous task);
@@ -20,18 +19,17 @@ add question marks where needed in messages
 
 /** technical logic issues
 remove getters for propertys assigned via streams; (last getter for objectmapper?!)
-fix problem with onwheel event... move it to hostlistener??
 move dynamic gameComponent creation/destruction to service???
 move app/wrapper component redundant logic to services;
 is massive assignments in properties needed?
 change wrapper-compoonent to main-component???
 
 /** Bugs issues
-when scroll top doesn't set state.messageShouldScroll to false;     (deltaY);
-when scroll bottom doesn't set state.messageShouldScroll to true;   (deltaY);
 
 /** final changes issues
 delete test files / create tests / ask Den to write unit-tests??
+create build-file
+move to deployment??? / github pages ??
 add readme-file;
 remove to-do-file;
 final clean-up;

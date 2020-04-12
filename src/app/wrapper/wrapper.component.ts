@@ -80,16 +80,17 @@ import { FooterComponent } from '@project/footer/footer.component';
             onScroll();
         });
 
-        // update to use deltaY property for defining direction/place of 'wheel-end' event
-        this.renderer.listen(this.wrapper.nativeElement, 'wheel', () => {
+        this.renderer.listen(this.wrapper.nativeElement, 'wheel', ($event) => {
             if (this.wrapper.nativeElement.scrollHeight !== this.wrapper.nativeElement.clientHeight) {
-                if (this.shouldUpdateMessageShouldScroll) {
+                const { nativeElement: element } = this.wrapper;
+                const isScrolledBot = element.scrollTop + $event.deltaY >= element.scrollHeight - element.clientHeight;
+
+                if (this.shouldUpdateMessageShouldScroll && !isScrolledBot) {
                     this.state.messageShouldScroll$.next(false);
                     return;
                 }
 
-                // use contentContainer instead of wrapper??
-                if (this.wrapper.nativeElement.scrollTop === this.wrapper.nativeElement.scrollHeight - this.wrapper.nativeElement.clientHeight) {
+                if (isScrolledBot) {
                     this.state.messageShouldScroll$.next(true);
                 }
             }
