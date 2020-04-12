@@ -8,12 +8,11 @@ add styling to scroll-buttons;
 add transition to scroll-buttons appearence??
 
 /** business logic issues
-???update business logic to increase bot's inteligence [peak points logic];
 move startGame input to messageBox;
 start game should scroll to bottom (maybe related to previous task);
-switch numbersavings to logic trio: previous way => step => peaks;
 move to english;
 add question marks where needed in messages
+???update business logic to increase bot's inteligence if inflectionNumber is available (low priority);
 
 /** technical logic issues
 move dynamic gameComponent creation/destruction to service???
@@ -22,7 +21,6 @@ is massive assignments in properties needed?
 change wrapper-compoonent to main-component???
 
 /** Bugs issues
-handle empty string in input
 
 /** final changes issues
 delete test files / create tests / ask Den to write unit-tests??

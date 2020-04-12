@@ -1,56 +1,87 @@
 import { Injectable } from '@angular/core';
-import { StateService } from './state.service';
-
+import { StateService } from '@project/state.service';
+import { GuessWay } from '@project/models';
 
 @Injectable({
     providedIn: 'root'
 })
 export class GuesserService {
+    constructor(private state: StateService) { }
+
     messagesTemplate: string[] = ['Is this', 'Maybe it\'s', 'I think it is', 'How about'];
     currentGuess: number;
 
-    constructor(private state: StateService) { }
+    // first number is the biggest guessed number that are lesser than secret, second - the fewest that are bigger;
+    inflectionNumbers: [number, number] = [null, null];
+    step: number = 10;
+    previousWay: GuessWay = null;
 
-    guess(way: 'more' | 'less' | 'match'): void {
+    guess(way: GuessWay): void {
         if (way === 'match') {
             setTimeout(() => this.state.chat$.next({ text: 'Hooray!', person: 'guesser', stop: true }), 2000);
             return;
         }
 
-        let guess: number = way === 'more'
-            ? this.currentGuess + Math.ceil(Math.random() * 10)
-            : this.currentGuess - Math.ceil(Math.random() * 10);
-
-        while (true) {
-            if (this.state.guessedNumbers.includes(guess)) {
-                way === 'more' ? guess++ : guess--;
-                continue;
-            };
-
-            this.state.guessedNumbers.push(guess);
-            break;
+        // step handling logic
+        if( way === this.previousWay) {
+            this.step *= 2;
+        } else {
+            if (this.step !== 1) {
+              this.step = Math.trunc(this.step / 2) || 1;
+            }
         }
 
+        let guess: number = way === 'more'
+            ? this.currentGuess + Math.ceil(Math.random() * this.step)
+            : this.currentGuess - Math.ceil(Math.random() * this.step);
+
+        // inflectionNumber handling logic
+        if (this.inflectionNumbers[0] === +this.inflectionNumbers[0]) {
+            if(guess < this.inflectionNumbers[0]) {
+                guess = this.inflectionNumbers[0] + 1;
+            }
+        }
+        if (this.inflectionNumbers[1] === +this.inflectionNumbers[1]) {
+            if(guess > this.inflectionNumbers[1]) {
+                guess = this.inflectionNumbers[1] - 1;
+            }
+        }
+
+        this.previousWay = way;
         this.currentGuess = guess;
         setTimeout(() => this.state.chat$.next({ text: this.guessedMessage(this.currentGuess), person: 'guesser' }), 2000);
     }
 
     firstGuess(): void {
-        this.currentGuess = Math.ceil(Math.random() * 10);
-        this.state.guessedNumbers.push(this.currentGuess);
+        this.currentGuess = Math.ceil(Math.random() * this.step);
         this.state.chat$.next({ text: `${this.currentGuess}`, person: 'guesser' });
     }
 
     guessedMessage(guess: number): string {
-        return `${this.messagesTemplate[Math.floor(Math.random() * this.messagesTemplate.length)]} ${guess}`;
+        const { messagesTemplate: template } = this;
+        return `${template[Math.floor(Math.random() * template.length)]} ${guess}?`;
     }
 
     listenInterlocutor(message: string): void {
         if (message === 'You are right!') {
-            this.state.guessedNumbers = [];
+
+            // reset properties
+            this.inflectionNumbers = [null, null];
+            this.previousWay = null;
+            this.step = 10;
+
             return this.guess('match');
         };
+
         const meaningfulInfo = message.includes('more') ? 'more' : 'less';
+
+        if (this.previousWay && meaningfulInfo !== this.previousWay) {
+            if(this.previousWay === 'less') {
+                this.inflectionNumbers[0] = this.currentGuess;
+            } else {
+                this.inflectionNumbers[1] = this.currentGuess;
+            }
+        }
         this.guess(meaningfulInfo);
     }
 }
