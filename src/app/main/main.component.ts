@@ -1,15 +1,14 @@
-import { Component, OnInit, HostListener, Host, ElementRef, ViewChild, OnDestroy, Output, EventEmitter } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    OnDestroy,
+} from '@angular/core';
 import { StateService } from '../state.service'
 import { GameService } from '../game.service';
 import { FormControl } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
 import { scan, takeUntil } from 'rxjs/operators';
 import { Message } from '../models';
-
-// enum Scroll {
-//     'top',
-//     'bottom'
-// }
 
 @Component({
     selector: 'app-main',
@@ -35,10 +34,6 @@ export class MainComponent implements OnInit, OnDestroy {
             return acc
         }, []),
     );
-
-    // get shouldScroll(): boolean {
-    //     return this.state.messageShouldScroll;
-    // }
 
     ngOnInit() {
         this.state.messageShouldScroll$.pipe(

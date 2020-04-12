@@ -11,12 +11,7 @@ export class StateService {
     isEnded$: Subject<boolean> = new Subject<boolean>();
 
     secretNumber: number;
-    guessedNumbers: number[] = [];
-
-
-    // isStarted: boolean; //remove
-    // isEnded: boolean;
-    // messageShouldScroll: boolean = true;    //remove
+    guessedNumbers: number[] = [];  //remove in favor of peakNumbers[]
 
     // ?? put messeges$ here and set gameservices chatlistener to listen to last element of messages$ array
 }

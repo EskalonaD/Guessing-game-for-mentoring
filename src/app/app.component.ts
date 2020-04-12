@@ -6,7 +6,7 @@ import {
     AfterViewInit,
     OnDestroy,
     ComponentFactoryResolver,
-    OnInit
+    OnInit,
 } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
 import { StateService } from './state.service';
@@ -26,9 +26,9 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         private state: StateService,
         private renderer: Renderer2,
         private resolver: ComponentFactoryResolver,
-        ) { }
+    ) { }
 
-        title = 'game2';
+    title = 'game2';
         
     @ViewChild('contentContainer', { static: false }) private contentContainer: ElementRef;
     @ViewChild('wrapper', { static: false }) private wrapper: ElementRef;
@@ -69,9 +69,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             onScroll();
         });
 
-        // hack to restore messages scrollintoview when fully scrolled
         // update to use deltaY property for defining direction/place of 'wheel-end' event
-        //fix problem
         this.renderer.listen(this.wrapper.nativeElement, 'wheel', () => {
             if (this.wrapper.nativeElement.scrollHeight !== this.wrapper.nativeElement.clientHeight) {
                 if (this.shouldUpdateMessageShouldScroll) {
@@ -106,9 +104,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     startGame(): void {
         this.showStartGameButton = false;
         this.state.isEnded$.next(false);
-        // this.state.isEnded = false; // remove
 
-        //move creation to service???
         // change variables names;
         const componentFactory = this.resolver.resolveComponentFactory(this.GameComponent);
         const viewContainerRef = this.gameContainer.viewRef; // check what exactly is viewContainerRef and another Refs(elementref, componentref etc);

@@ -1,5 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { GameService } from '../game.service';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'app-footer',
@@ -7,13 +6,12 @@ import { GameService } from '../game.service';
     styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent {
-    constructor(private game: GameService) { }
+    constructor() { }
 
     @Output() private startAnotherGame: EventEmitter<void> = new EventEmitter<void>();
     @Output() private endGame: EventEmitter<void> = new EventEmitter<void>();
 
     closeGame(): void {
-        // this.game.endGame(); //remove?      // if needed move logic to parent smart-component;
         this.endGame.emit();
     }
 
