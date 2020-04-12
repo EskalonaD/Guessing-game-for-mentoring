@@ -8,8 +8,8 @@ import { Component, Output, EventEmitter } from '@angular/core';
 export class FooterComponent {
     constructor() { }
 
-    @Output() private startAnotherGame: EventEmitter<void> = new EventEmitter<void>();
-    @Output() private endGame: EventEmitter<void> = new EventEmitter<void>();
+    @Output() private startAnotherGame: EventEmitter<void> = new EventEmitter;
+    @Output() private endGame: EventEmitter<void> = new EventEmitter;
 
     closeGame(): void {
         this.endGame.emit();

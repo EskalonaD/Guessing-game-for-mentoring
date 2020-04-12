@@ -3,3 +3,5 @@ export interface Message {
     person: 'guesser' | 'puzzler';
     stop?: boolean;
 }
+
+export type ScrollDirection = 'top' | 'bottom';

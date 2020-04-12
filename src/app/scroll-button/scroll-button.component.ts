@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    Input,
+    Output,
+    EventEmitter
+} from '@angular/core';
+import { ScrollDirection } from '@project/models';
 
 @Component({
     selector: 'app-scroll-button',
@@ -8,8 +15,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class ScrollButtonComponent implements OnInit {
     constructor() { }
 
-    @Input() direction: 'top' | 'bottom';
-    @Output() private scrollTo: EventEmitter<'top' | 'bottom'> = new EventEmitter<'top' | 'bottom'>();
+    @Input() direction: ScrollDirection;
+    @Output() private scrollTo: EventEmitter<ScrollDirection> = new EventEmitter<ScrollDirection>();
 
     arrowDirection = {
         top: '&#8648;',

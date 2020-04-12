@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { MainComponent } from './main/main.component';
+import { GameComponent } from './game/game.component';
 import { MessageComponent } from './message/message.component';
 import { ScrollDirective } from './scroll.directive';
 import { ScrollButtonComponent } from './scroll-button/scroll-button.component';
@@ -18,7 +18,7 @@ import { WrapperComponent } from './wrapper/wrapper.component';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    MainComponent,
+    GameComponent,
     MessageComponent,
     ScrollDirective,
     ScrollButtonComponent,
@@ -32,7 +32,7 @@ import { WrapperComponent } from './wrapper/wrapper.component';
   providers: [
   ],
   entryComponents: [
-    MainComponent,
+    GameComponent,
   ],
   bootstrap: [AppComponent]
 })
