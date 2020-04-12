@@ -9,11 +9,12 @@ export class StateService {
     chat$: Subject<any> = new Subject(); // change any-type to proper type;
     messageShouldScroll$: Subject<boolean> = new Subject<boolean>();
     isEnded$: Subject<boolean> = new Subject<boolean>();
-    isStarted: boolean; //remove
+
     secretNumber: number;
     guessedNumbers: number[] = [];
-    
-    
+
+
+    // isStarted: boolean; //remove
     // isEnded: boolean;
     // messageShouldScroll: boolean = true;    //remove
 

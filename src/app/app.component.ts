@@ -30,7 +30,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
         title = 'game2';
         
-        @ViewChild('contentContainer', { static: false }) private contentContainer: ElementRef;
+    @ViewChild('contentContainer', { static: false }) private contentContainer: ElementRef;
     @ViewChild('wrapper', { static: false }) private wrapper: ElementRef;
     @ViewChild(GameAnchorDirective, { static: true }) gameContainer: GameAnchorDirective; //check why static true;
 
@@ -39,6 +39,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     private shouldUpdateMessageShouldScroll: boolean;
 
     showFooter: boolean;
+    showStartGameButton: boolean;
     showScrollButtons: boolean = false;
     showScrollTopButton: boolean = false;
     showScrollBottomButton: boolean = false;
@@ -47,6 +48,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     ).subscribe(_ => this.onScroll());
 
     ngOnInit() {
+        this.showStartGameButton = true;
+
         this.state.isEnded$.pipe(
             takeUntil(this.unsubscriber$),
         ).subscribe(boolean => this.showFooter = boolean);
@@ -101,9 +104,11 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     startGame(): void {
+        this.showStartGameButton = false;
         this.state.isEnded$.next(false);
         // this.state.isEnded = false; // remove
 
+        //move creation to service???
         // change variables names;
         const componentFactory = this.resolver.resolveComponentFactory(this.GameComponent);
         const viewContainerRef = this.gameContainer.viewRef; // check what exactly is viewContainerRef and another Refs(elementref, componentref etc);
@@ -111,7 +116,10 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     endGame(): void {
-        this.gameContainer.viewRef.clear()
+        this.showFooter = false;
+        this.showStartGameButton = true;
+        this.showScrollButtons = false;
+        this.gameContainer.viewRef.clear();
     }
 
     scrollTo(way: string): void {

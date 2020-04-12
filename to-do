@@ -15,7 +15,6 @@ move startGame input to messageBox;
 start game should scroll to bottom (maybe related to previous task);
 switch numbersavings to logic trio: previous way => step => peaks;
 disable buttons/inputs after choice;
-fix bug when scroll top doesn't set state.messageShouldScroll to false;
 
 /**internal logic
 move state to rxjs;
@@ -26,6 +25,12 @@ create wrapper component;
 change mainComponent name;
 move initialization to ngOnInit method;
 make dumb components really dumb (remove service injections at least);
+move dynamic mainComponent creation/destruction to service???
+move app/wrapper component logic to services
+
+/** Bugs
+when scroll top doesn't set state.messageShouldScroll to false;
+Hooray messageBlock doesn't scroll bottom;
 
 /** final changes
 add readme-file;

@@ -41,10 +41,11 @@ export class MainComponent implements OnInit, OnDestroy {
     // }
 
     ngOnInit() {
-        this.shouldScroll = true;
         this.state.messageShouldScroll$.pipe(
             takeUntil(this.unsubscriber$),
-        ).subscribe(x => this.shouldScroll = x)
+        ).subscribe(boolean => this.shouldScroll = boolean);
+
+        this.state.messageShouldScroll$.next(true);
     }
 
     ngOnDestroy() {
