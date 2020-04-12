@@ -15,6 +15,8 @@ move startGame input to messageBox;
 start game should scroll to bottom (maybe related to previous task);
 switch numbersavings to logic trio: previous way => step => peaks;
 disable buttons/inputs after choice;
+move to english;
+add question marks where needed in messages
 
 /** technical logic issues
 remove getters for propertys assigned via streams; (last getter for objectmapper?!)
@@ -22,6 +24,7 @@ fix problem with onwheel event... move it to hostlistener??
 move dynamic gameComponent creation/destruction to service???
 move app/wrapper component redundant logic to services;
 is massive assignments in properties needed?
+change wrapper-compoonent to main-component???
 
 /** Bugs issues
 when scroll top doesn't set state.messageShouldScroll to false;     (deltaY);
