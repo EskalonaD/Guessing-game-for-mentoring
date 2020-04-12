@@ -43,6 +43,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     showScrollButtons: boolean = false;
     showScrollTopButton: boolean = false;
     showScrollBottomButton: boolean = false;
+
+    //remove prop and move subscription to onInit??
     scrollButtonUpdaterOnMessegeCreation$: Subscription = this.state.chat$.pipe(
         takeUntil(this.unsubscriber$),
     ).subscribe(_ => this.onScroll());
@@ -77,6 +79,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                     return;
                 }
 
+                // use contentContainer instead of wrapper??
                 if (this.wrapper.nativeElement.scrollTop === this.wrapper.nativeElement.scrollHeight - this.wrapper.nativeElement.clientHeight) {
                     this.state.messageShouldScroll$.next(true);
                 }
