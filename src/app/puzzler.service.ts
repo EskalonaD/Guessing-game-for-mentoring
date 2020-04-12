@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { StateService } from './state.service';
+import { StateService } from '@project/state.service';
+import { GuessWay } from '@project/models';
 
 @Injectable({
     providedIn: 'root'
@@ -7,23 +8,25 @@ import { StateService } from './state.service';
 export class PuzzlerService {
     constructor(private state: StateService) { }
 
+    secretNumber: number;
     messagesTemplate: string[] = ['No, it\'s', 'You\'re not correct, it\'s', 'Try again, it\'s', 'Actually no, it\'s'];
 
-    guessedAnswerMessage(way: 'more' | 'less' | 'match', guess: number): string {
+    guessedAnswerMessage(way: GuessWay, guess: number): string {
         if (way === 'match') return 'You are right!';
-        return `${this.messagesTemplate[Math.floor(Math.random() * this.messagesTemplate.length)]} ${way} than ${guess}`;
+        const { messagesTemplate: template } = this;
+        return `${template[Math.floor(Math.random() * template.length)]} ${way} than ${guess}.`;
     };
 
     guessAnswer(guess: number): void {
-        const way = this.state.secretNumber === guess
+        const way = this.secretNumber === guess
             ? 'match'
-            : this.state.secretNumber > guess
+            : this.secretNumber > guess
                 ? 'more' : 'less';
         setTimeout(() => this.state.chat$.next({ text: this.guessedAnswerMessage(way, guess), person: 'puzzler', }), 2000);
     }
 
     rememberNumber(input: number): void {
-        this.state.secretNumber = input;
+        this.secretNumber = input;
     }
 
     listenInterlocutor(message: string): void {
