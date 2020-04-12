@@ -10,6 +10,7 @@ import { MessageComponent } from './message/message.component';
 import { ScrollDirective } from './scroll.directive';
 import { ScrollButtonComponent } from './scroll-button/scroll-button.component';
 import { GameAnchorDirective } from './game-anchor.directive';
+import { WrapperComponent } from './wrapper/wrapper.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { GameAnchorDirective } from './game-anchor.directive';
     MessageComponent,
     ScrollDirective,
     ScrollButtonComponent,
-    GameAnchorDirective
+    GameAnchorDirective,
+    WrapperComponent
   ],
   imports: [
     BrowserModule,

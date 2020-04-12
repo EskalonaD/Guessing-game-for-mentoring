@@ -3,12 +3,12 @@ import {
     OnInit,
     OnDestroy,
 } from '@angular/core';
-import { StateService } from '../state.service'
-import { GameService } from '../game.service';
+import { StateService } from '@project/state.service'
+import { GameService } from '@project/game.service';
 import { FormControl } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
 import { scan, takeUntil } from 'rxjs/operators';
-import { Message } from '../models';
+import { Message } from '@project/models';
 
 @Component({
     selector: 'app-main',
