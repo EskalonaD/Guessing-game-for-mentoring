@@ -18,7 +18,6 @@ move to english;
 add question marks where needed in messages
 
 /** technical logic issues
-remove getters for propertys assigned via streams; (last getter for objectmapper?!)
 move dynamic gameComponent creation/destruction to service???
 move app/wrapper component redundant logic to services;
 is massive assignments in properties needed?

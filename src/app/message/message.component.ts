@@ -1,6 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Message } from '@project/models';
 
+const picturesMapper = {
+    puzzler: 'https://avatarfiles.alphacoders.com/715/71560.jpg',
+    guesser: 'https://avatarfiles.alphacoders.com/114/114469.png',
+}
+
 @Component({
     selector: 'app-message',
     templateUrl: './message.component.html',
@@ -12,18 +17,15 @@ export class MessageComponent implements OnInit {
     @Input() message: Message;
 
     showLoader: boolean;
+    logoURL: string;
 
-    get logoURL(): string { //check if getter is needed instead of regular property
-        return this.message.person === 'puzzler'        // use object-mapper instead
-            ? 'https://avatarfiles.alphacoders.com/715/71560.jpg'
-            : 'https://avatarfiles.alphacoders.com/114/114469.png'
-    }
 
     ngOnInit() {
         this.showLoader = true;
+        this.logoURL = picturesMapper[this.message.person];
 
         setTimeout(() => {
             this.showLoader = false;
-        }, 800);
+        }, 1200);
     }
 }
