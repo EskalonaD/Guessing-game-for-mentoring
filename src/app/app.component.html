@@ -1,23 +1,26 @@
 <!-- add logic-wrapper component -->
 <div class="wrapper" #wrapper (scroll)="onScroll()">
     <div #contentContainer>
-        <app-header (start)="startGame()"></app-header>
+        <app-header
+            [showStartGameButton]="showStartGameButton"
+            (start)="startGame()"
+        ></app-header>
         <template appGameAnchor></template>
         <div class="scroll-buttons-container" *ngIf="showScrollButtons">
             <app-scroll-button
-                [ngClass]="{ 'show': topScroll }"
+                [ngClass]="{ 'show': showScrollTopButton }"
                 direction="top"
                 (scrollTo)="scrollTo($event)"
             ></app-scroll-button>
             <app-scroll-button
-                [ngClass]="{ 'show': bottomScroll }"
+                [ngClass]="{ 'show': showScrollBottomButton }"
                 direction="bottom"
                 (scrollTo)="scrollTo($event)"
             ></app-scroll-button>
         </div>
-        <app-footer 
-        (startAnotherGame)="startGame()"
-        (endGame)="endGame()"
+        <app-footer *ngIf="showFooter"
+            (startAnotherGame)="startGame()"
+            (endGame)="endGame()"
         ></app-footer>
     </div>
 </div>

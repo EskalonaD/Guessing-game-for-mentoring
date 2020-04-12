@@ -1,31 +1,21 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { StateService } from '../state.service';
-import { GameService } from '../game.service';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+    selector: 'app-footer',
+    templateUrl: './footer.component.html',
+    styleUrls: ['./footer.component.scss']
 })
-export class FooterComponent implements OnInit {
-  @Output()  private startAnotherGame: EventEmitter<void> = new EventEmitter<void>();
-  @Output()  private endGame: EventEmitter<void> = new EventEmitter<void>();
+export class FooterComponent {
+    constructor() { }
 
-  constructor(private state: StateService, private game: GameService) { }
+    @Output() private startAnotherGame: EventEmitter<void> = new EventEmitter<void>();
+    @Output() private endGame: EventEmitter<void> = new EventEmitter<void>();
 
-  ngOnInit() {
-  }
+    closeGame(): void {
+        this.endGame.emit();
+    }
 
-  get shouldShow(): boolean {
-    return this.state.isEnded;
-  }
-
-  closeGame(): void {
-    this.game.endGame(); //remove?
-    this.endGame.emit();
-  }
-
-  restartGame(): void {
-    this.startAnotherGame.emit();
-  }
+    restartGame(): void {
+        this.startAnotherGame.emit();
+    }
 }

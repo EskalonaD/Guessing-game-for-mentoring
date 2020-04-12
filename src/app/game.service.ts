@@ -2,9 +2,8 @@ import { Injectable, ComponentRef } from '@angular/core';
 import { GuesserService } from './guesser.service';
 import { PuzzlerService } from './puzzler.service';
 import { StateService } from './state.service';
-import { takeUntil, tap } from 'rxjs/operators';
 import { Message } from './models';
-import { MainComponent } from './main/main.component';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -25,18 +24,14 @@ export class GameService {
             const person = data.person === 'guesser' ? 'puzzler' : 'guesser';
             this[person].listenInterlocutor(data.text);
         })
-    )//.subscribe(); // Lisa, how should i handle it? subscribe or pass to be subscribed in components?
+    )//.subscribe(); // how should i handle it? subscribe or pass to be subscribed in components?
 
     setGameParameters(secret: number): void {
         this.puzzler.rememberNumber(secret);
         this.guesser.firstGuess();
     }
 
-    private finishGame(): void {
-        this.state.isEnded = true;
-    }
-
-    endGame(): void {
-        this.state.isEnded = false;
+    private finishGame(): void {    //remove?
+        this.state.isEnded$.next(true);
     }
 }
