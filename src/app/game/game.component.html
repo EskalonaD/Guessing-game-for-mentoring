@@ -4,9 +4,13 @@
         <input
             type="number"
             [formControl]="input"
-        ><button (click)="setSecretNumber(input.value)">
+            (blur)="onInputBlur()"
+            (keydown)="onInputKeyDown($event)"
+        >
+        <div *ngIf="incorrectInput">errorBlock</div>
+        <!-- <button >
             ok
-        </button>
+        </button> -->
     </div>
     <div class="message-wrapper">
         <div *ngIf="messages$ | async as messages">
