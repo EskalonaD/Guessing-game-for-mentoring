@@ -1,14 +1,14 @@
-/** view
+/** view issues
 make input pretty (use scss variables to sure that label will always fit input height??)
 add animation to 'spinner'
 add scroll on fixed element feature;
-separate one game view from another;
+separate one game view from another;     (animation separator line from center to ends???)
 fix header/form css???
+add styling to scroll-buttons;
 add transition to scroll-buttons appearence??
 
-/** business logic
+/** business logic issues
 submit on inputs enter click;
-when game ends scroll to bottom;
 update onwheel to, when rich the scrollend restart scrolling on message creation; (deltaY)
 ???update business logic to increase bot's inteligence [peak points logic];
 move startGame input to messageBox;
@@ -16,19 +16,18 @@ start game should scroll to bottom (maybe related to previous task);
 switch numbersavings to logic trio: previous way => step => peaks;
 disable buttons/inputs after choice;
 
-/** technical logic
-remove getters for propertys assigned via streams;
+/** technical logic issues
+remove getters for propertys assigned via streams; (last getter for objectmapper?!)
 fix problem with onwheel event... move it to hostlistener??
 move dynamic gameComponent creation/destruction to service???
 move app/wrapper component redundant logic to services;
 is massive assignments in properties needed?
 
-/** Bugs
+/** Bugs issues
 when scroll top doesn't set state.messageShouldScroll to false;     (deltaY);
 when scroll bottom doesn't set state.messageShouldScroll to true;   (deltaY);
-Hooray messageBlock doesn't scroll bottom;
 
-/** final changes
+/** final changes issues
 delete test files / create tests / ask Den to write unit-tests??
 add readme-file;
 remove to-do-file;

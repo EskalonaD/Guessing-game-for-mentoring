@@ -9,11 +9,12 @@ import {
     OnInit,
 } from '@angular/core';
 import { StateService } from '@project/state.service';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 import { Subscription, Subject } from 'rxjs';
 import { GameAnchorDirective } from '@project/game-anchor.directive';
 import { GameComponent } from '@project/game/game.component';
 import { ScrollDirection } from '@project/models';
+import { FooterComponent } from '@project/footer/footer.component';
 
 @Component({
     selector: 'app-wrapper',
@@ -29,7 +30,8 @@ import { ScrollDirection } from '@project/models';
 
     @ViewChild('contentContainer', { static: false }) private contentContainer: ElementRef;
     @ViewChild('wrapper', { static: false }) private wrapper: ElementRef;
-    @ViewChild(GameAnchorDirective, { static: true }) gameContainer: GameAnchorDirective; //check why static true;
+    @ViewChild(GameAnchorDirective, { static: true }) private gameContainer: GameAnchorDirective; //check why static true;
+    @ViewChild(FooterComponent, { static: false }) private footer: FooterComponent;
 
     private unsubscriber$: Subject<void> = new Subject<void>();
     private GameComponent: typeof GameComponent = GameComponent;
@@ -49,7 +51,15 @@ import { ScrollDirection } from '@project/models';
 
         this.state.isEnded$.pipe(
             takeUntil(this.unsubscriber$),
-        ).subscribe(boolean => this.showFooter = boolean);
+        ).subscribe(shouldShow => {
+            this.showFooter = shouldShow;
+            if(shouldShow) {
+                setTimeout(() => {
+                    this.footer.wrapper.nativeElement.scrollIntoView({block: 'end', behavior: 'smooth' })
+                    this.showScrollBottomButton = false;
+                });
+            }
+        });
 
         this.state.messageShouldScroll$
             .pipe(

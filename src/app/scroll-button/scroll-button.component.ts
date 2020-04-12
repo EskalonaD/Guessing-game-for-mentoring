@@ -16,7 +16,7 @@ export class ScrollButtonComponent implements OnInit {
     constructor() { }
 
     @Input() direction: ScrollDirection;
-    @Output() private scrollTo: EventEmitter<ScrollDirection> = new EventEmitter<ScrollDirection>();
+    @Output() private scrollTo: EventEmitter<ScrollDirection> = new EventEmitter;
 
     arrowDirection = {
         top: '&#8648;',
