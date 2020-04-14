@@ -2,6 +2,9 @@ import {
     Component,
     OnInit,
     OnDestroy,
+    ViewChild,
+    ElementRef,
+    Renderer2,
 } from '@angular/core';
 import { StateService } from '@project/state.service'
 import { GameService } from '@project/game.service';
@@ -17,10 +20,13 @@ import { Message } from '@project/models';
     styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit, OnDestroy {
-    constructor(private state: StateService, private game: GameService) { }
+    constructor(private state: StateService, private game: GameService, private renderer: Renderer2) { }
 
     private unsubscriber$: Subject<void> = new Subject;
 
+    @ViewChild('divider', { static: false }) private divider:ElementRef;
+
+    showDivider: boolean;
     shouldScroll: boolean;
     input: FormControl = new FormControl('');   //check if private flag can be used instead public / move initialization to inInit??
     incorrectInput: boolean;
@@ -29,6 +35,8 @@ export class GameComponent implements OnInit, OnDestroy {
         scan((acc: Message[], val: Message) => {
             if (val.stop) {
                 this.state.messageShouldScroll$.next(false);
+                this.showDivider = true;
+                setTimeout(() => this.renderer.addClass(this.divider.nativeElement, 'large-divider'))
                 this.unsubscriber$.next();
                 this.unsubscriber$.complete();
             }
@@ -40,6 +48,7 @@ export class GameComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.shouldScroll = true;
         this.incorrectInput = false;
+        this.showDivider = false;
 
         this.state.messageShouldScroll$.pipe(
             takeUntil(this.unsubscriber$),

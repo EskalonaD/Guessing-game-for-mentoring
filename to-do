@@ -1,13 +1,13 @@
 /** view issues
 make input pretty (use scss variables to sure that label will always fit input height??)
-add animation to 'spinner'
-separate one game view from another;     (animation separator line from center to ends???)
+add animation to 'spinner' ??
 fix header/form css???
 
 /** business logic issues
-start game should scroll to bottom
+update logic to cover more-more/less-less ways sequence after peak;
 
 /** technical logic issues
+should i set start way as 'more'?
 move dynamic gameComponent creation/destruction to service???
 move app/wrapper component redundant logic to services;
 is massive assignments in properties needed?

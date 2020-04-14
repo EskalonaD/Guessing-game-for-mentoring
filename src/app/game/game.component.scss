@@ -29,4 +29,17 @@
             color: rgb(235, 233, 233);
         }
     }
+
+    .divider {
+        width: 0px;
+        margin: 20px;
+        align-self: center;
+        border: 2px solid #000;
+        border-radius: 10%;
+        transition: width 1.5s;
+
+        &.large-divider {
+            width: 100%;
+        }
+    }
 }

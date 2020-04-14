@@ -1,4 +1,4 @@
-<div class="main-wrapper" #wrapper>
+<div class="main-wrapper">
     <div class="number-saver">
         <p>What number should I remember?</p>
         <input
@@ -8,9 +8,6 @@
             (keydown)="onInputKeyDown($event)"
         >
         <div *ngIf="incorrectInput">errorBlock</div>
-        <!-- <button >
-            ok
-        </button> -->
     </div>
     <div class="message-wrapper">
         <div *ngIf="messages$ | async as messages">
@@ -21,4 +18,8 @@
             ></app-message>
         </div>
     </div>
+    <div *ngIf="showDivider"
+        class="divider"
+        #divider
+    ></div>
 </div>
