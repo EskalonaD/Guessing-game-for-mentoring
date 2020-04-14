@@ -2,7 +2,7 @@
     <img class="logo" [src]="logoURL">
     <p class="nickname">{{ message.person }}</p>
 </div>
-<div class="loader" *ngIf="showLoader; else messageBlock">{{message.person}} typing...</div>
+<div [@blinking]="coloured" class="loader"   >{{message.person}} typing...</div>
 <ng-template #messageBlock>
     <div class="message">{{ message.text }}</div>
 </ng-template>
