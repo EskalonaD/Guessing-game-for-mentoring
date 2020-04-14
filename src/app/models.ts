@@ -5,3 +5,5 @@ export interface Message {
 }
 
 export type ScrollDirection = 'top' | 'bottom';
+
+export type GuessWay = 'more' | 'less' | 'match';
