@@ -5,6 +5,7 @@ fix header/form css???
 
 /** business logic issues
 update logic to cover more-more/less-less ways sequence after peak;
+remove unnecessary question mark from guessers messages.
 
 /** technical logic issues
 should i set start way as 'more'?
