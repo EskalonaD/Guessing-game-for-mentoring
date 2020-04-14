@@ -5,9 +5,7 @@ separate one game view from another;     (animation separator line from center t
 fix header/form css???
 
 /** business logic issues
-move startGame input to messageBox??;
-start game should scroll to bottom (maybe related to previous task);
-move to english;
+start game should scroll to bottom
 
 /** technical logic issues
 move dynamic gameComponent creation/destruction to service???
