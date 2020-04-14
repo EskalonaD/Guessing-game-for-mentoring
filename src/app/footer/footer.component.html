@@ -1,4 +1,10 @@
 <div #wrapper>
-    <button (click)="closeGame()">Finish Game</button>
-    <button (click)="restartGame()">Restart Game</button>
+    <app-button
+        title="Finish Game"
+        (click)="closeGame()"
+    ></app-button>
+    <app-button
+        title="Restart Game"
+        (click)="restartGame()"
+    ></app-button>
 </div>

@@ -1,4 +1,7 @@
 <div class="header-wrapper">
     <h1>Guessing Game</h1>
-    <button *ngIf="showStartGameButton" (click)="startGame()">Start Game</button>
+    <app-button *ngIf="showStartGameButton"
+        title="Start Game"
+        (click)="startGame()"
+    ></app-button>
 </div>

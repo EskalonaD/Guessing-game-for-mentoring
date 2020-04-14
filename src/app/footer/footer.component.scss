@@ -2,22 +2,4 @@ div {
     display: flex;
     justify-content: center;
     align-items: center;
-
-    button {
-        width: 120px;
-        height: 55px;
-        border-radius: 10px;
-        outline: none;
-        margin: 10px;
-        border: 2px solid rgb(16, 191, 214);
-        cursor: pointer;
-
-        &:hover {
-            box-shadow:  2px 5px 5px 5px #555;
-        }
-
-        &:active {
-            box-shadow:  inset 1px 2px 3px 3px #555;
-        }
-    }
 }

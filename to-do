@@ -1,7 +1,6 @@
 /** view issues
 make input pretty (use scss variables to sure that label will always fit input height??)
 add animation to 'spinner' ??
-fix header/form css???
 
 /** business logic issues
 update logic to cover more-more/less-less ways sequence after peak;

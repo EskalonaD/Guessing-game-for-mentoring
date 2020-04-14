@@ -11,6 +11,7 @@ import { ScrollDirective } from './scroll.directive';
 import { ScrollButtonComponent } from './scroll-button/scroll-button.component';
 import { GameAnchorDirective } from './game-anchor.directive';
 import { WrapperComponent } from './wrapper/wrapper.component';
+import { ButtonComponent } from './button/button.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { WrapperComponent } from './wrapper/wrapper.component';
     ScrollDirective,
     ScrollButtonComponent,
     GameAnchorDirective,
-    WrapperComponent
+    WrapperComponent,
+    ButtonComponent
   ],
   imports: [
     BrowserModule,
