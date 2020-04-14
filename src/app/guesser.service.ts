@@ -8,13 +8,20 @@ import { GuessWay } from '@project/models';
 export class GuesserService {
     constructor(private state: StateService) { }
 
-    messagesTemplate: string[] = ['Is this', 'Maybe it\'s', 'I think it is', 'How about'];
+    messagesTemplate: string[] = [
+        'Is this',
+        'Maybe it\'s',
+        'How about',
+        'Could it be',
+        'Is it',
+        '',
+    ];
     currentGuess: number;
 
     // first number is the biggest guessed number that are lesser than secret, second - the fewest that are bigger;
     inflectionNumbers: [number, number] = [null, null];
     step: number = 10;
-    previousWay: GuessWay = null;
+    previousWay: GuessWay = 'more';
 
     guess(way: GuessWay): void {
         if (way === 'match') {
@@ -23,11 +30,11 @@ export class GuesserService {
         }
 
         // step handling logic
-        if( way === this.previousWay) {
+        if (way === this.previousWay) {
             this.step *= 2;
         } else {
             if (this.step !== 1) {
-              this.step = Math.trunc(this.step / 2) || 1;
+                this.step = Math.trunc(this.step / 2) || 1;
             }
         }
 
@@ -36,16 +43,12 @@ export class GuesserService {
             : this.currentGuess - Math.ceil(Math.random() * this.step);
 
         // inflectionNumber handling logic
-        if (this.inflectionNumbers[0] === +this.inflectionNumbers[0]) {
-            if(guess < this.inflectionNumbers[0]) {
+            if (guess < this.inflectionNumbers[0]) {
                 guess = this.inflectionNumbers[0] + 1;
             }
-        }
-        if (this.inflectionNumbers[1] === +this.inflectionNumbers[1]) {
-            if(guess > this.inflectionNumbers[1]) {
+            if (guess > this.inflectionNumbers[1]) {
                 guess = this.inflectionNumbers[1] - 1;
             }
-        }
 
         this.previousWay = way;
         this.currentGuess = guess;
@@ -67,7 +70,7 @@ export class GuesserService {
 
             // reset properties
             this.inflectionNumbers = [null, null];
-            this.previousWay = null;
+            this.previousWay = 'more';
             this.step = 10;
 
             return this.guess('match');
@@ -75,13 +78,13 @@ export class GuesserService {
 
         const meaningfulInfo = message.includes('more') ? 'more' : 'less';
 
-        if (this.previousWay && meaningfulInfo !== this.previousWay) {
-            if(this.previousWay === 'less') {
+            if (meaningfulInfo === 'more') {
                 this.inflectionNumbers[0] = this.currentGuess;
-            } else {
+            }
+            if (meaningfulInfo === 'less') {
                 this.inflectionNumbers[1] = this.currentGuess;
             }
-        }
+
         this.guess(meaningfulInfo);
     }
 }

@@ -3,8 +3,6 @@ make input pretty (use scss variables to sure that label will always fit input h
 add animation to 'spinner' ??
 
 /** business logic issues
-update logic to cover more-more/less-less ways sequence after peak;
-remove unnecessary question mark from guessers messages.
 
 /** technical logic issues
 should i set start way as 'more'?
@@ -12,6 +10,7 @@ move dynamic gameComponent creation/destruction to service???
 move app/wrapper component redundant logic to services;
 is massive assignments in properties needed?
 change wrapper-compoonent to main-component???
+handle nulls in inflectionNumbers
 
 /** Bugs issues
 
