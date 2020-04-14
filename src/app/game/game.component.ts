@@ -10,10 +10,6 @@ import { Observable, Subject } from 'rxjs';
 import { scan, takeUntil } from 'rxjs/operators';
 import { Message } from '@project/models';
 
-enum keyHandlerMapper {
-    'Escape' = 27,
-    'Enter' = 13,
-}
 
 @Component({
     selector: 'app-game',
@@ -57,40 +53,41 @@ export class GameComponent implements OnInit, OnDestroy {
         this.unsubscriber$.complete();
     }
 
-    setSecretNumber(): void {
+    handleInput(): void {
+        if (!this.shouldHandleInput()) return;
+
         const { value } = this.input;
 
-        if(value === +value) {
+        if (value === +value) {
             this.incorrectInput = false;
+
             this.game.setGameParameters(+value);
             this.input.disable();
-            return;
         }
+        else {
+            this.incorrectInput = true;
 
-        this.incorrectInput = true;
-    }
-    
-    onInputBlur() {
-        if(!this.input.disabled) {
             this.input.setValue(null);
         }
+    }
+
+    private shouldHandleInput(): boolean {
+        return !this.input.disabled
     }
 
     onInputKeyDown(event: KeyboardEvent): void {
         event.stopPropagation();
         const key = event.key || event.keyCode;
 
-        if(keyHandlerMapper.hasOwnProperty(key)) {
-            switch (key) {
-                case 'Enter':
-                case 13:
-                    this.setSecretNumber();
+        switch (key) {
+            case 'Enter':
+            case 13:
+                this.handleInput();
                 break;
-                case 'Escape':
-                case 27:
-                    this.onInputBlur();
+            case 'Escape':
+            case 27:
+                this.input.setValue(null);
                 break;
-            }
         }
     }
 }

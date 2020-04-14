@@ -4,7 +4,7 @@
         <input
             type="number"
             [formControl]="input"
-            (blur)="onInputBlur()"
+            (blur)="handleInput($event)"
             (keydown)="onInputKeyDown($event)"
         >
         <div *ngIf="incorrectInput">errorBlock</div>
