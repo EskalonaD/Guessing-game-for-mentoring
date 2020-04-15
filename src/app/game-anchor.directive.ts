@@ -4,6 +4,5 @@ import { Directive, ViewContainerRef } from '@angular/core';
   selector: '[appGameAnchor]'
 })
 export class GameAnchorDirective {
-
-  constructor(public viewRef: ViewContainerRef) { }
+    constructor(public viewRef: ViewContainerRef) { }
 }

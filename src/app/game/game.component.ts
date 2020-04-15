@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { StateService } from '@project/state.service'
 import { GameService } from '@project/game.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
 import { scan, takeUntil } from 'rxjs/operators';
 import { Message } from '@project/models';
@@ -20,34 +20,41 @@ import { Message } from '@project/models';
     styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit, OnDestroy {
-    constructor(private state: StateService, private game: GameService, private renderer: Renderer2) { }
+    constructor(
+        private state: StateService,
+        private game: GameService,
+        private renderer: Renderer2,
+        ) { }
 
     private unsubscriber$: Subject<void> = new Subject;
+    private input: FormControl;
+
     @ViewChild('divider', { static: false }) private divider:ElementRef;
 
     showDivider: boolean;
     shouldScroll: boolean;
-    input: FormControl = new FormControl('');   //check if private flag can be used instead public / move initialization to inInit??
     incorrectInput: boolean;
-    messages$: Observable<Message[]> = this.game.chatListener$.pipe(    //move to ngOnInit??
-        takeUntil(this.unsubscriber$),
-        scan((acc: Message[], val: Message) => {
-            if (val.stop) {
-                this.state.messageShouldScroll$.next(false);
-                this.showDivider = true;
-                setTimeout(() => this.renderer.addClass(this.divider.nativeElement, 'large-divider'))
-                this.unsubscriber$.next();
-                this.unsubscriber$.complete();
-            }
-            acc.push(val);
-            return acc
-        }, []),
-    );
+    messages$: Observable<Message[]>;
 
     ngOnInit() {
         this.shouldScroll = true;
         this.incorrectInput = false;
         this.showDivider = false;
+        this.input = new FormControl('');
+        this.messages$ = this.game.chatListener$.pipe(
+            takeUntil(this.unsubscriber$),
+            scan((acc: Message[], val: Message) => {
+                if (val.stop) {
+                    this.state.messageShouldScroll$.next(false);
+                    this.showDivider = true;
+                    setTimeout(() => this.renderer.addClass(this.divider.nativeElement, 'large-divider'))
+                    this.unsubscriber$.next();
+                    this.unsubscriber$.complete();
+                }
+                acc.push(val);
+                return acc
+            }, []),
+        );
 
         this.state.messageShouldScroll$.pipe(
             takeUntil(this.unsubscriber$),

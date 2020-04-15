@@ -18,12 +18,13 @@ export class ScrollButtonComponent implements OnInit {
     @Input() direction: ScrollDirection;
     @Output() private scrollTo: EventEmitter<ScrollDirection> = new EventEmitter;
 
-    arrowDirection = {
-        top: '&#8648;',
-        bottom: '&#8650;',
-    }
+    arrowDirection: object;
 
     ngOnInit() {
+        this.arrowDirection = {
+            top: '&#8648;',
+            bottom: '&#8650;',
+        }
     }
 
     onClick(): void {

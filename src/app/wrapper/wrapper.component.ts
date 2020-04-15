@@ -9,8 +9,8 @@ import {
     OnInit,
 } from '@angular/core';
 import { StateService } from '@project/state.service';
-import { takeUntil, tap } from 'rxjs/operators';
-import { Subscription, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import { GameAnchorDirective } from '@project/game-anchor.directive';
 import { GameComponent } from '@project/game/game.component';
 import { ScrollDirection } from '@project/models';
@@ -33,7 +33,7 @@ import { FooterComponent } from '@project/footer/footer.component';
     @ViewChild(GameAnchorDirective, { static: true }) private gameContainer: GameAnchorDirective; //check why static true;
     @ViewChild(FooterComponent, { static: false }) private footer: FooterComponent;
 
-    private unsubscriber$: Subject<void> = new Subject<void>();
+    private unsubscriber$: Subject<void> = new Subject;
     private GameComponent: typeof GameComponent = GameComponent;
     private shouldUpdateMessageShouldScroll: boolean;
 

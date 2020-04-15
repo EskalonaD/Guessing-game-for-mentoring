@@ -42,14 +42,14 @@ export class InputComponent implements OnInit, ControlValueAccessor {
     constructor(private renderer: Renderer2) { }
 
     @Input() placeholder: string;
-    @Output() blurred = new EventEmitter;
-    @ViewChild('input', { static: true }) private input: ElementRef;    //false?
-    @ViewChild('animatedPlaceholder', { static: true }) private animatedPlaceholder: ElementRef;    //false?
-    @ViewChild('fieldset', { static: true }) private fieldset: ElementRef;    //false?
-    @ViewChild('span', { static: true }) private span: ElementRef;    //false?
+    @Output() blurred: EventEmitter<void> = new EventEmitter;
+    @ViewChild('input', { static: true }) private input: ElementRef;
+    @ViewChild('animatedPlaceholder', { static: true }) private animatedPlaceholder: ElementRef;
+    @ViewChild('fieldset', { static: true }) private fieldset: ElementRef;
+    @ViewChild('span', { static: true }) private span: ElementRef;
 
     onChange: any = () => { };
-    onTouch = () => { };
+    onTouch: any = () => { };
     error: boolean;
 
     ngOnInit() {
@@ -63,7 +63,7 @@ export class InputComponent implements OnInit, ControlValueAccessor {
      * When you instantiate a new FormControl .
      * When you call this.control.patchValue/setValue(value)
      */
-    writeValue(input: any): void {
+    writeValue(input: number | string): void {
         let value: number | string;
 
         if (input === `${+input}`) {
@@ -97,7 +97,6 @@ export class InputComponent implements OnInit, ControlValueAccessor {
      */
     registerOnTouched(fn: any): void {
         this.onTouch = fn;
-        // throw new Error("Method not implemented.");
     }
 
     /**
@@ -120,12 +119,12 @@ export class InputComponent implements OnInit, ControlValueAccessor {
 
     // control value accessor interface methods ends
 
-    onInput(event) {
-        this.writeValue(event.target.value);
+    onInput(event: Event): void {
+        this.writeValue((<HTMLInputElement>event.target).value);
         this.onTouch();
     }
 
-    onBlur() {
+    onBlur(): void {
         if (this.error) {
             this.renderer.addClass(this.fieldset.nativeElement, 'errored-fieldset')
         }
@@ -137,7 +136,7 @@ export class InputComponent implements OnInit, ControlValueAccessor {
         this.blurred.emit();
     }
 
-    onInputFocus() {
+    onInputFocus(): void {
         this.renderer.addClass(this.animatedPlaceholder.nativeElement, 'clicked-placeholder');
         this.renderer.addClass(this.fieldset.nativeElement, 'clicked-fieldset');
         this.renderer.addClass(this.span.nativeElement, 'clicked-span');

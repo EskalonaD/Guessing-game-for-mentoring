@@ -1,4 +1,10 @@
-import { Component, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import {
+    Component,
+    Output,
+    EventEmitter,
+    ViewChild,
+    ElementRef
+} from '@angular/core';
 
 @Component({
     selector: 'app-footer',
