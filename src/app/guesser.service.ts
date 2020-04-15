@@ -25,7 +25,7 @@ export class GuesserService {
 
     guess(way: GuessWay): void {
         if (way === 'match') {
-            setTimeout(() => this.state.chat$.next({ text: 'Hooray!', person: 'guesser', stop: true }), 2000);
+            setTimeout(() => this.state.chat$.next({ text: 'Hooray!', person: 'guesser', stop: true }), 3000);
             return;
         }
 
@@ -52,7 +52,7 @@ export class GuesserService {
 
         this.previousWay = way;
         this.currentGuess = guess;
-        setTimeout(() => this.state.chat$.next({ text: this.guessedMessage(this.currentGuess), person: 'guesser' }), 2000);
+        setTimeout(() => this.state.chat$.next({ text: this.guessedMessage(this.currentGuess), person: 'guesser' }), 3000);
     }
 
     firstGuess(): void {
