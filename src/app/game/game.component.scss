@@ -2,9 +2,14 @@
   display: flex;
   flex-direction: column;
 
-  .number-saver {
-        text-align: right;
-        min-height: 100px;
+    .input-container {
+        max-width: 30%;
+        min-width: 270px;
+        margin: 15px 0 15px auto;
+
+        .error-message {
+            text-align: right;
+        }
     }
 
     .message-wrapper {

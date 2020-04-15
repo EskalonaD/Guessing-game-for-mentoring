@@ -1,23 +1,23 @@
 /** view issues
-make input pretty (use scss variables to sure that label will always fit input height??)
-add animation to 'spinner' ??
+add animation to 'spinner' (opacity???) ??
 
 /** business logic issues
 
 /** technical logic issues
-should i set start way as 'more'?
 move dynamic gameComponent creation/destruction to service???
 move app/wrapper component redundant logic to services;
 is massive assignments in properties needed?
 change wrapper-compoonent to main-component???
 handle nulls in inflectionNumbers
+create learning-2 branch
 
 /** Bugs issues
 
 /** final changes issues
+move interesting features to playground (dynamic components/custom form-control component/buttona)
 delete test files / create tests / ask Den to write unit-tests??
 create build-file
-move to deployment??? / github pages ??
+move to deployment??? / github pages / herokU??????
 add readme-file;
 remove to-do-file;
 final clean-up;

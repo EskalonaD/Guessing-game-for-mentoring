@@ -118,6 +118,8 @@ import { FooterComponent } from '@project/footer/footer.component';
         this.showStartGameButton = false;
         this.state.isEnded$.next(false);
 
+
+        // todo move to playground
         // change variables names;
         const componentFactory = this.resolver.resolveComponentFactory(this.GameComponent);
         const viewContainerRef = this.gameContainer.viewRef; // check what exactly is viewContainerRef and another Refs(elementref, componentref etc);
