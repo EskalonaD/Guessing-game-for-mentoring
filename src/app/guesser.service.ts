@@ -43,10 +43,10 @@ export class GuesserService {
             : this.currentGuess - Math.ceil(Math.random() * this.step);
 
         // inflectionNumber handling logic
-            if (guess < this.inflectionNumbers[0]) {
+            if (this.inflectionNumbers[0] && guess < this.inflectionNumbers[0]) {
                 guess = this.inflectionNumbers[0] + 1;
             }
-            if (guess > this.inflectionNumbers[1]) {
+            if (this.inflectionNumbers[1] && guess > this.inflectionNumbers[1]) {
                 guess = this.inflectionNumbers[1] - 1;
             }
 

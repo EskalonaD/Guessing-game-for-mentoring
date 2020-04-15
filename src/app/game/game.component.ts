@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { StateService } from '@project/state.service'
 import { GameService } from '@project/game.service';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
 import { scan, takeUntil } from 'rxjs/operators';
 import { Message } from '@project/models';
@@ -23,7 +23,6 @@ export class GameComponent implements OnInit, OnDestroy {
     constructor(private state: StateService, private game: GameService, private renderer: Renderer2) { }
 
     private unsubscriber$: Subject<void> = new Subject;
-
     @ViewChild('divider', { static: false }) private divider:ElementRef;
 
     showDivider: boolean;
