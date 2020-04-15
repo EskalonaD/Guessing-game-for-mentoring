@@ -10,6 +10,7 @@ is massive assignments in properties needed?
 change wrapper-compoonent to main-component???
 handle nulls in inflectionNumbers
 create learning-2 branch
+refactor logic? remove peak/previous way props
 
 /** Bugs issues
 
