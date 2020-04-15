@@ -75,11 +75,6 @@ import { FooterComponent } from '@project/footer/footer.component';
     }
 
     ngAfterViewInit() {
-        const onScroll = this.renderer.listen(this.wrapper.nativeElement, 'scroll', () => {
-            this.showScrollButtons = true;
-            onScroll();
-        });
-
         this.renderer.listen(this.wrapper.nativeElement, 'wheel', ($event) => {
             if (this.wrapper.nativeElement.scrollHeight !== this.wrapper.nativeElement.clientHeight) {
                 const { nativeElement: element } = this.wrapper;
@@ -118,6 +113,10 @@ import { FooterComponent } from '@project/footer/footer.component';
         this.showStartGameButton = false;
         this.state.isEnded$.next(false);
 
+        const onScroll = this.renderer.listen(this.wrapper.nativeElement, 'scroll', () => {
+            this.showScrollButtons = true;
+            onScroll();
+        });
 
         // todo move to playground
         // change variables names;
