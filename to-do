@@ -3,14 +3,8 @@
 /** business logic issues
 
 /** technical logic issues
-move dynamic gameComponent creation/destruction to service???
-move app/wrapper component redundant logic to services;
-is massive assignments in properties needed?
-change wrapper-compoonent to main-component???
-handle nulls in inflectionNumbers
 create learning-2 branch
 refactor logic? remove peak/previous way props
-onInit initialization
 
 /** Bugs issues
 
