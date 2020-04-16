@@ -44,10 +44,14 @@ export class GuesserService {
 
         // inflectionNumber handling logic
             if (this.inflectionNumbers[0] && guess < this.inflectionNumbers[0]) {
-                guess = this.inflectionNumbers[0] + 1;
+                this.step = Math.trunc(this.step / 2) || 1;
+                this.guess(way);
+                return;
             }
             if (this.inflectionNumbers[1] && guess > this.inflectionNumbers[1]) {
-                guess = this.inflectionNumbers[1] - 1;
+                this.step = Math.trunc(this.step / 2) || 1;
+                this.guess(way);
+                return;
             }
 
         this.previousWay = way;

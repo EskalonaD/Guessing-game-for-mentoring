@@ -3,8 +3,7 @@
 /** business logic issues
 
 /** technical logic issues
-create learning-2 branch
-refactor logic? remove peak/previous way props
+Refactor services: split function to more simple
 
 /** Bugs issues
 
@@ -14,5 +13,5 @@ delete test files / create tests / ask Den to write unit-tests??
 create build-file
 move to deployment??? / github pages / herokU??????
 add readme-file;
-remove to-do-file;
 final clean-up;
+remove to-do-file;

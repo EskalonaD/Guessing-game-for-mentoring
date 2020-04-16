@@ -11,20 +11,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-/**
- *
- * We have to register the component by pushing it to the global NG_VALUE_ACCESSOR provider.
- *
- * At runtime, Angular calls all the elements that bound to this token and uses them to bind the model to the
- * respective element.
- *
- * We need to use forwardRef because in ES6 classes are not hoisted to the top, so at this point (inside
- * the metadata definition), the class is not yet defined.
- *
- * multi: true indicates that several elements of NG_VALUE_ACCESSOR can be bound to this provider.
- *
- * Note: You can implement only one custom ControlValueAccessor per component.
- */
+
 export const CUSTOM_INPUT_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => InputComponent),
@@ -56,13 +43,6 @@ export class InputComponent implements OnInit, ControlValueAccessor {
         this.error = false;
     }
 
-    // control value accessor interface methods starts
-
-    /**
-     * Angular will call this method with the value in one of the following cases:
-     * When you instantiate a new FormControl .
-     * When you call this.control.patchValue/setValue(value)
-     */
     writeValue(input: number | string): void {
         let value: number | string;
 
@@ -78,46 +58,17 @@ export class InputComponent implements OnInit, ControlValueAccessor {
         this.onChange(value)
     }
 
-    /**
-     *
-     * Set the function to be called when the control receives a change event. Angular provides you with a function and
-     * asks you to call it whenever there is a change in your component with the new value so that it can update the
-     * control.
-     *
-     * In our case, we need to listen to the input event and call this function with the new value.
-     */
     registerOnChange(fn: any): void {
         this.onChange = fn;
     }
 
-    /**
-     *
-     * registerOnTouched method is the same as registerOnChange except that you should call her when the
-     * control receives a touch event.
-     */
     registerOnTouched(fn: any): void {
         this.onTouch = fn;
     }
 
-    /**
-     *
-     * This function is called when the control status changes to or from DISABLED. Depending on the value, it will enable
-     * or disable the appropriate DOM element.
-     *
-     * Angular will call this method in one of the following cases:
-     * When you instantiate a new FormControl with the disabled property set to true. FormControl({value: '', disabled:
-     *  true})
-     *
-     * When you call control.disable() or when you call control.enable() after your already called control.disable() at
-     * least once.
-     *
-     * In our case, we need to add a disabled class to our div to simulate a disabled textarea.
-     */
     setDisabledState(isDisabled: boolean): void {
         this.renderer.setProperty(this.input.nativeElement, 'disabled', isDisabled)
     }
-
-    // control value accessor interface methods ends
 
     onInput(event: Event): void {
         this.writeValue((<HTMLInputElement>event.target).value);

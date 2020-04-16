@@ -30,7 +30,7 @@ import { FooterComponent } from '@project/footer/footer.component';
 
     @ViewChild('contentContainer', { static: false }) private contentContainer: ElementRef;
     @ViewChild('wrapper', { static: false }) private wrapper: ElementRef;
-    @ViewChild(GameAnchorDirective, { static: true }) private gameContainer: GameAnchorDirective; //check why static true;
+    @ViewChild(GameAnchorDirective, { static: true }) private gameContainer: GameAnchorDirective;
     @ViewChild(FooterComponent, { static: false }) private footer: FooterComponent;
 
     private unsubscriber$: Subject<void> = new Subject;
@@ -119,7 +119,7 @@ import { FooterComponent } from '@project/footer/footer.component';
         });
 
         const componentFactory = this.resolver.resolveComponentFactory(this.GameComponent);
-        const viewContainerRef = this.gameContainer.viewRef; // check what exactly is viewContainerRef and another Refs(elementref, componentref etc);
+        const viewContainerRef = this.gameContainer.viewRef;
         viewContainerRef.createComponent(componentFactory);
     }
 
