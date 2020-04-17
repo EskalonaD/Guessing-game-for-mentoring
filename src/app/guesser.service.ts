@@ -29,34 +29,37 @@ export class GuesserService {
             return;
         }
 
-        // step handling logic
-        if (way === this.previousWay) {
-            this.step *= 2;
-        } else {
-            if (this.step !== 1) {
-                this.step = Math.trunc(this.step / 2) || 1;
-            }
-        }
+        this.handleStepLogic(way);
 
         let guess: number = way === 'more'
             ? this.currentGuess + Math.ceil(Math.random() * this.step)
             : this.currentGuess - Math.ceil(Math.random() * this.step);
 
-        // inflectionNumber handling logic
-            if (this.inflectionNumbers[0] && guess < this.inflectionNumbers[0]) {
-                this.step = Math.trunc(this.step / 2) || 1;
-                this.guess(way);
-                return;
-            }
-            if (this.inflectionNumbers[1] && guess > this.inflectionNumbers[1]) {
-                this.step = Math.trunc(this.step / 2) || 1;
-                this.guess(way);
-                return;
-            }
+        if(this.isExceedBoundaries(guess)) {
+            this.step = Math.trunc(this.step / 2) || 1;
+            this.guess(way);
+            return;
+        }
 
         this.previousWay = way;
         this.currentGuess = guess;
+
         setTimeout(() => this.state.chat$.next({ text: this.guessedMessage(this.currentGuess), person: 'guesser' }), 3000);
+    }
+
+    private handleStepLogic(way: GuessWay): void {
+        if(way === this.previousWay) this.step *= 2;
+        else this.step = Math.trunc(this.step / 2) || 1;
+    }
+
+    private isExceedBoundaries(num: number): boolean {
+        if (!this.inflectionNumbers.includes(null)) {
+            return this.inflectionNumbers.some((el, i) => {
+                if (el === num) return true;
+                return i ? num > el : num < el;
+            })
+        }
+        return false;
     }
 
     firstGuess(): void {
@@ -71,7 +74,6 @@ export class GuesserService {
 
     listenInterlocutor(message: string): void {
         if (message === 'You are right!') {
-
             // reset properties
             this.inflectionNumbers = [null, null];
             this.previousWay = 'more';
@@ -82,13 +84,12 @@ export class GuesserService {
 
         const meaningfulInfo = message.includes('more') ? 'more' : 'less';
 
-            if (meaningfulInfo === 'more') {
-                this.inflectionNumbers[0] = this.currentGuess;
-            }
-            if (meaningfulInfo === 'less') {
-                this.inflectionNumbers[1] = this.currentGuess;
-            }
-
+        this.setInflectionNumber(meaningfulInfo);
         this.guess(meaningfulInfo);
+    }
+
+    private setInflectionNumber(way: GuessWay): void {
+        if(way === 'more') this.inflectionNumbers[0] = this.currentGuess;
+        else this.inflectionNumbers[1] = this.currentGuess;
     }
 }
