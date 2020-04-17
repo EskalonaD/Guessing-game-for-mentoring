@@ -53,6 +53,7 @@ export class InputComponent implements OnInit, ControlValueAccessor {
         else {
             value = input;
             this.error = true;
+            if(input === null) this.input.nativeElement.value = "";
         }
 
         this.onChange(value)
