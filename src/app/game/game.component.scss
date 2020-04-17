@@ -42,9 +42,11 @@
         border: 2px solid #000;
         border-radius: 10%;
         transition: width 1.5s;
+        visibility: hidden;
 
         &.large-divider {
             width: 100%;
+            visibility: visible;
         }
     }
 }

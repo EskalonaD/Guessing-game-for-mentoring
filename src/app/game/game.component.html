@@ -18,8 +18,8 @@
             ></app-message>
         </div>
     </div>
-    <div *ngIf="showDivider"
-        class="divider"
+    <div
+        [ngClass]="{ divider: true, 'large-divider': showDivider }"
         #divider
     ></div>
 </div>

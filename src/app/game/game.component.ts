@@ -23,13 +23,10 @@ export class GameComponent implements OnInit, OnDestroy {
     constructor(
         private state: StateService,
         private game: GameService,
-        private renderer: Renderer2,
         ) { }
 
     private unsubscriber$: Subject<void> = new Subject;
     private input: FormControl;
-
-    @ViewChild('divider', { static: false }) private divider:ElementRef;
 
     showDivider: boolean;
     shouldScroll: boolean;
@@ -45,9 +42,7 @@ export class GameComponent implements OnInit, OnDestroy {
             takeUntil(this.unsubscriber$),
             scan((acc: Message[], val: Message) => {
                 if (val.stop) {
-                    this.state.messageShouldScroll$.next(false);
-                    this.showDivider = true;
-                    setTimeout(() => this.renderer.addClass(this.divider.nativeElement, 'large-divider'))
+                    setTimeout(() => this.showDivider = true, 1800);
                     this.unsubscriber$.next();
                     this.unsubscriber$.complete();
                 }
