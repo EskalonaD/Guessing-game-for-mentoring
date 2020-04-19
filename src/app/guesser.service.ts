@@ -35,7 +35,7 @@ export class GuesserService {
             ? this.currentGuess + Math.ceil(Math.random() * this.step)
             : this.currentGuess - Math.ceil(Math.random() * this.step);
 
-        if(this.isExceedBoundaries(guess)) {
+        if (this.isExceedBoundaries(guess)) {
             this.step = Math.trunc(this.step / 2) || 1;
             this.guess(way);
             return;
@@ -48,7 +48,7 @@ export class GuesserService {
     }
 
     private handleStepLogic(way: GuessWay): void {
-        if(way === this.previousWay) this.step *= 2;
+        if (way === this.previousWay) this.step *= 2;
         else this.step = Math.trunc(this.step / 2) || 1;
     }
 
@@ -57,7 +57,7 @@ export class GuesserService {
             return this.inflectionNumbers.some((el, i) => {
                 if (el === num) return true;
                 return i ? num > el : num < el;
-            })
+            });
         }
         return false;
     }
@@ -80,7 +80,7 @@ export class GuesserService {
             this.step = 10;
 
             return this.guess('match');
-        };
+        }
 
         const meaningfulInfo = message.includes('more') ? 'more' : 'less';
 
@@ -89,7 +89,7 @@ export class GuesserService {
     }
 
     private setInflectionNumber(way: GuessWay): void {
-        if(way === 'more') this.inflectionNumbers[0] = this.currentGuess;
+        if (way === 'more') this.inflectionNumbers[0] = this.currentGuess;
         else this.inflectionNumbers[1] = this.currentGuess;
     }
 }

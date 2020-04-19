@@ -24,7 +24,7 @@ export class GameService {
             const person = data.person === 'guesser' ? 'puzzler' : 'guesser';
             this[person].listenInterlocutor(data.text);
         })
-    )
+    );
 
     setGameParameters(secret: number): void {
         this.puzzler.rememberNumber(secret);

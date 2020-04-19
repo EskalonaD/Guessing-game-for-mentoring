@@ -4,7 +4,7 @@ import { Message } from '@project/models';
 const picturesMapper = {
     puzzler: '../assets/71560.jpg',
     guesser: '../assets/114469.png',
-}
+};
 
 @Component({
     selector: 'app-message',

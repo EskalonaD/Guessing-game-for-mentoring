@@ -3,7 +3,7 @@ import {
     OnInit,
     OnDestroy,
 } from '@angular/core';
-import { StateService } from '@project/state.service'
+import { StateService } from '@project/state.service';
 import { GameService } from '@project/game.service';
 import { FormControl } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
@@ -39,7 +39,7 @@ export class GameComponent implements OnInit, OnDestroy {
             takeUntil(this.unsubscriber$),
             scan((acc: Message[], val: Message) => {
                 acc.push(val);
-                return acc
+                return acc;
             }, []),
         );
 
@@ -54,7 +54,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
         this.state.messageShouldScroll$.pipe(
             takeUntil(this.unsubscriber$),
-        ).subscribe(boolean => this.shouldScroll = boolean);
+        ).subscribe(x => this.shouldScroll = x);
 
         this.state.messageShouldScroll$.next(true);
     }

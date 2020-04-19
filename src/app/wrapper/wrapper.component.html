@@ -2,7 +2,7 @@
     <div #contentContainer>
         <app-header
             [showStartGameButton]="showStartGameButton"
-            (start)="startGame()"
+            (startGame)="startGame()"
         ></app-header>
         <template appGameAnchor></template>
         <div class="scroll-buttons-container" *ngIf="showScrollButtons">

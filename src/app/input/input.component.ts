@@ -34,9 +34,9 @@ export class InputComponent implements OnInit, ControlValueAccessor {
     @ViewChild('fieldset', { static: true }) private fieldset: ElementRef;
     @ViewChild('span', { static: true }) private span: ElementRef;
 
+    error: boolean;
     onChange: any = () => { };
     onTouch: any = () => { };
-    error: boolean;
 
     ngOnInit() {
         this.error = false;
@@ -52,10 +52,10 @@ export class InputComponent implements OnInit, ControlValueAccessor {
         else {
             value = input;
             this.error = true;
-            if(input === null) this.input.nativeElement.value = "";
+            if (input === null) this.input.nativeElement.value = '';
         }
 
-        this.onChange(value)
+        this.onChange(value);
     }
 
     registerOnChange(fn: any): void {
@@ -67,7 +67,7 @@ export class InputComponent implements OnInit, ControlValueAccessor {
     }
 
     setDisabledState(isDisabled: boolean): void {
-        this.renderer.setProperty(this.input.nativeElement, 'disabled', isDisabled)
+        this.renderer.setProperty(this.input.nativeElement, 'disabled', isDisabled);
     }
 
     onInput(event: Event): void {
@@ -77,11 +77,11 @@ export class InputComponent implements OnInit, ControlValueAccessor {
 
     onBlur(): void {
         if (this.error) {
-            this.renderer.addClass(this.fieldset.nativeElement, 'errored-fieldset')
+            this.renderer.addClass(this.fieldset.nativeElement, 'errored-fieldset');
         }
         else {
-            this.renderer.removeClass(this.fieldset.nativeElement, 'errored-fieldset')
-            this.renderer.addClass(this.fieldset.nativeElement, 'blurred-fieldset')
+            this.renderer.removeClass(this.fieldset.nativeElement, 'errored-fieldset');
+            this.renderer.addClass(this.fieldset.nativeElement, 'blurred-fieldset');
         }
 
         this.blurred.emit();

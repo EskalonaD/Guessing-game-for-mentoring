@@ -24,7 +24,7 @@ export class ScrollButtonComponent implements OnInit {
         this.arrowDirection = {
             top: '&#8648;',
             bottom: '&#8650;',
-        }
+        };
     }
 
     onClick(): void {

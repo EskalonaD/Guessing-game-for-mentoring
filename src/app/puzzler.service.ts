@@ -20,7 +20,7 @@ export class PuzzlerService {
         if (way === 'match') return 'You are right!';
         const { messagesTemplate: template } = this;
         return `${template[Math.floor(Math.random() * template.length)]} ${way} than ${guess}.`;
-    };
+    }
 
     guessAnswer(guess: number): void {
         const way = this.secretNumber === guess

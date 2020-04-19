@@ -9,32 +9,32 @@ import {
 } from '@angular/core';
 import { StateService } from '@project/state.service';
 import { takeUntil, delay, delayWhen } from 'rxjs/operators';
-import { Subject, empty, of } from 'rxjs';
+import { Subject, of } from 'rxjs';
 import { GameAnchorDirective } from '@project/game-anchor.directive';
 import { GameComponent } from '@project/game/game.component';
 import { ScrollDirection } from '@project/models';
 import { FooterComponent } from '@project/footer/footer.component';
 
-const debounce = (func: Function, ms: number): (any) => void => {
+const debounce = (func: (...args: any[]) => any, ms: number): (...args: any[]) => void => {
     let timeoutID: any;
-    return (...args: any[])  => {
-        if(timeoutID) {
-            return undefined
+    return (...args: any[]) => {
+        if (timeoutID) {
+            return undefined;
         }
         timeoutID = setTimeout(() => {
-            func(...args)
+            func(...args);
             clearTimeout(timeoutID);
             timeoutID = undefined;
         }, ms);
-    }
-}
+    };
+};
 
 @Component({
     selector: 'app-wrapper',
     templateUrl: './wrapper.component.html',
     styleUrls: ['./wrapper.component.scss']
-  })
-  export class WrapperComponent implements OnInit, OnDestroy {
+})
+export class WrapperComponent implements OnInit, OnDestroy {
     constructor(
         private state: StateService,
         private renderer: Renderer2,
@@ -55,16 +55,18 @@ const debounce = (func: Function, ms: number): (any) => void => {
     showScrollButtons: boolean;
     showScrollTopButton: boolean;
     showScrollBottomButton: boolean;
+    onScroll: (...arg: any[]) => void;
 
     ngOnInit() {
         this.showScrollButtons = false;
         this.showScrollTopButton = false;
         this.showScrollBottomButton = false;
         this.showStartGameButton = true;
+        this.onScroll = debounce(this.scrollLogic.bind(this), 200);
 
         this.state.isEnded$.pipe(
             takeUntil(this.unsubscriber$),
-            delayWhen(isEnded => isEnded ? empty().pipe(delay(3000)) : of(null)),
+            delayWhen(isEnded => isEnded ? of(null).pipe(delay(3000)) : of(null)),
         ).subscribe(shouldShow => {
             this.showFooter = shouldShow;
         });
@@ -80,15 +82,13 @@ const debounce = (func: Function, ms: number): (any) => void => {
             const distanceToBottom = Number(getComputedStyle(this.wrapper.nativeElement)
                 .marginBottom.replace('px', ''));
             this.scrollToBottomButtonHideZone = elementHeight + distanceToBottom;
-        })
+        });
     }
 
     ngOnDestroy() {
         this.unsubscriber$.next();
         this.unsubscriber$.complete();
     }
-
-    onScroll = debounce(this.scrollLogic.bind(this), 200);
 
     scrollLogic(): void {
         if (this.showScrollButtons) {
@@ -141,7 +141,7 @@ const debounce = (func: Function, ms: number): (any) => void => {
     scrollTo(way: ScrollDirection): void {
         if (way === 'top') {
             this.state.messageShouldScroll$.next(false);
-            this.contentContainer.nativeElement.scrollIntoView({ block: 'start', behavior: 'smooth' })
+            this.contentContainer.nativeElement.scrollIntoView({ block: 'start', behavior: 'smooth' });
         }
 
         if (way === 'bottom') {

@@ -14,9 +14,9 @@ export class HeaderComponent {
     constructor() { }
 
     @Input() showStartGameButton: boolean;
-    @Output() private start: EventEmitter<void> = new EventEmitter;
+    @Output() private startGame: EventEmitter<void> = new EventEmitter;
 
-    startGame(): void {
-        this.start.emit();
+    onClick(): void {
+        this.startGame.emit();
     }
 }
