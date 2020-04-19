@@ -15,10 +15,10 @@ export class GameService {
         private state: StateService,
     ) { }
 
-    chatListener$ = this.state.chat$.pipe(
+    chatListener$ = this.state.chatDelayer$.pipe(
         tap((data: Message) => {
             if (data.stop === true) {
-                setTimeout(() => this.finishGame(), 3000);
+                this.finishGame();
                 return;
             }
             const person = data.person === 'guesser' ? 'puzzler' : 'guesser';

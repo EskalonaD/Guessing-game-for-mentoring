@@ -3,25 +3,38 @@ import {
     ViewChild,
     ElementRef,
     Renderer2,
-    AfterViewInit,
     OnDestroy,
     ComponentFactoryResolver,
     OnInit,
 } from '@angular/core';
 import { StateService } from '@project/state.service';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { takeUntil, delay, delayWhen } from 'rxjs/operators';
+import { Subject, empty, of } from 'rxjs';
 import { GameAnchorDirective } from '@project/game-anchor.directive';
 import { GameComponent } from '@project/game/game.component';
 import { ScrollDirection } from '@project/models';
 import { FooterComponent } from '@project/footer/footer.component';
+
+const debounce = (func: Function, ms: number): (any) => void => {
+    let timeoutID: any;
+    return (...args: any[])  => {
+        if(timeoutID) {
+            return undefined
+        }
+        timeoutID = setTimeout(() => {
+            func(...args)
+            clearTimeout(timeoutID);
+            timeoutID = undefined;
+        }, ms);
+    }
+}
 
 @Component({
     selector: 'app-wrapper',
     templateUrl: './wrapper.component.html',
     styleUrls: ['./wrapper.component.scss']
   })
-  export class WrapperComponent implements OnInit, AfterViewInit, OnDestroy {
+  export class WrapperComponent implements OnInit, OnDestroy {
     constructor(
         private state: StateService,
         private renderer: Renderer2,
@@ -35,7 +48,7 @@ import { FooterComponent } from '@project/footer/footer.component';
 
     private unsubscriber$: Subject<void> = new Subject;
     private GameComponent: typeof GameComponent = GameComponent;
-    private shouldUpdateMessageShouldScroll: boolean;
+    private scrollToBottomButtonHideZone: number;
 
     showFooter: boolean;
     showStartGameButton: boolean;
@@ -51,45 +64,23 @@ import { FooterComponent } from '@project/footer/footer.component';
 
         this.state.isEnded$.pipe(
             takeUntil(this.unsubscriber$),
+            delayWhen(isEnded => isEnded ? empty().pipe(delay(3000)) : of(null)),
         ).subscribe(shouldShow => {
             this.showFooter = shouldShow;
-            if(shouldShow) {
-                setTimeout(() => {
-                    this.footer.wrapper.nativeElement.scrollIntoView({block: 'end', behavior: 'smooth' })
-                    this.showScrollBottomButton = false;
-                });
-            }
         });
 
-        this.state.messageShouldScroll$
-            .pipe(
-                takeUntil(this.unsubscriber$),
-            ).subscribe(boolean => {
-                this.shouldUpdateMessageShouldScroll = boolean;
-                this.showScrollBottomButton = !boolean;
-            });
-
-        this.state.chat$.pipe(
+        this.state.chatDelayer$.pipe(
             takeUntil(this.unsubscriber$),
-        ).subscribe(_ => this.onScroll());
-    }
+        ).subscribe(_ => this.scrollLogic());
 
-    ngAfterViewInit() {
-        this.renderer.listen(this.wrapper.nativeElement, 'wheel', ($event) => {
-            if (this.wrapper.nativeElement.scrollHeight !== this.wrapper.nativeElement.clientHeight) {
-                const { nativeElement: element } = this.wrapper;
-                const isScrolledBot = element.scrollTop + $event.deltaY >= element.scrollHeight - element.clientHeight;
-
-                if (this.shouldUpdateMessageShouldScroll && !isScrolledBot) {
-                    this.state.messageShouldScroll$.next(false);
-                    return;
-                }
-
-                if (isScrolledBot) {
-                    this.state.messageShouldScroll$.next(true);
-                }
-            }
-        });
+        this.state.scrollToBottomButtonHideZone$.pipe(
+            takeUntil(this.unsubscriber$),
+        ).subscribe(appearingElementHeightString => {
+            const elementHeight = Number(appearingElementHeightString.replace('px', ''));
+            const distanceToBottom = Number(getComputedStyle(this.wrapper.nativeElement)
+                .marginBottom.replace('px', ''));
+            this.scrollToBottomButtonHideZone = elementHeight + distanceToBottom;
+        })
     }
 
     ngOnDestroy() {
@@ -97,14 +88,31 @@ import { FooterComponent } from '@project/footer/footer.component';
         this.unsubscriber$.complete();
     }
 
-    onScroll(): void {
+    onScroll = debounce(this.scrollLogic.bind(this), 200);
+
+    scrollLogic(): void {
         if (this.showScrollButtons) {
-            if (this.wrapper.nativeElement.scrollTop > 50) {
+            const { nativeElement: element } = this.wrapper;
+
+            if (element.scrollTop > 50) {
                 this.showScrollTopButton = true;
             }
 
-            if (this.wrapper.nativeElement.scrollTop < 50) {
+            if (element.scrollTop < 50) {
                 this.showScrollTopButton = false;
+            }
+
+            const isScrolledBot = element.scrollTop + this.scrollToBottomButtonHideZone >= element.scrollHeight - element.clientHeight;
+
+            if (!isScrolledBot) {
+                this.state.messageShouldScroll$.next(false);
+                this.showScrollBottomButton = true;
+                return;
+            }
+
+            if (isScrolledBot) {
+                this.state.messageShouldScroll$.next(true);
+                this.showScrollBottomButton = false;
             }
         }
     }

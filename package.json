@@ -1,5 +1,5 @@
 {
-  "name": "game2",
+  "name": "guessing-game-for-js-mentoring",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

@@ -19,7 +19,6 @@ export class MessageComponent implements OnInit {
     showLoader: boolean;
     logoURL: string;
 
-
     ngOnInit() {
         this.showLoader = true;
         this.logoURL = picturesMapper[this.message.person];
