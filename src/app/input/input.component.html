@@ -1,0 +1,13 @@
+<div>
+    <fieldset #fieldset>
+        <legend>
+            <span #span>{{ placeholder }}</span>
+        </legend>
+        <input #input
+            (input)="onInput($event)"
+            (blur)="onBlur()"
+            (focus)="onInputFocus()"
+        >
+        <p #animatedPlaceholder class="placeholder">{{ placeholder }}</p>
+    </fieldset>
+</div>

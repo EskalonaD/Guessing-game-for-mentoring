@@ -3,8 +3,8 @@ import { Message } from '@project/models';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 const picturesMapper = {
-    puzzler: 'https://avatarfiles.alphacoders.com/715/71560.jpg',
-    guesser: 'https://avatarfiles.alphacoders.com/114/114469.png',
+    puzzler: '../assets/71560.jpg',
+    guesser: '../assets/114469.png',
 }
 
 enum Colours {
@@ -46,7 +46,7 @@ export class MessageComponent implements OnInit {
 
         setTimeout(() => {
             this.showLoader = false;
-        }, 1200);
+        }, 1600);
     }
 
 

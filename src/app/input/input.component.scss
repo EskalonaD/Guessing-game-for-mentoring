@@ -1,0 +1,57 @@
+fieldset{
+    position: relative;
+    height: 2.2em;
+
+    &.clicked-fieldset {
+        height: 2.6em;
+        margin-top: -0.4em;
+        border: 0.1em solid #00f;
+    }
+
+    &.blurred-fieldset {
+        border: 0.1em solid rgb(120, 120, 120)
+    }
+
+    &.errored-fieldset {
+        border: 0.1em solid rgb(255, 0, 0)
+    }
+
+    legend {
+        text-align: left;
+        font-size: 0.8em;
+
+        span {
+            display: none;
+            visibility: hidden;
+
+            &.clicked-span {
+            display: block;
+            }
+        }
+    }
+
+    input {
+        width: 100%;
+        outline: none;
+        border: none;
+        caret-color: gray;
+        position: absolute;
+        bottom: 0;
+        left: 0.2em;
+        background-color: transparent;
+        height: 2.2em;
+    }
+
+    .placeholder {
+        position: absolute;
+        font-size: 1em;
+        top: calc(50% - 0.6em);
+        pointer-events: none;
+        transition: all 0.3s;
+
+        &.clicked-placeholder {
+            top: calc(0px - 0.3em);
+            font-size: 0.8em;
+        }
+    }
+}

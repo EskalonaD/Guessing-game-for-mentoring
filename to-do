@@ -1,24 +1,13 @@
 /** view issues
-make input pretty (use scss variables to sure that label will always fit input height??)
-add animation to 'spinner'
-separate one game view from another;     (animation separator line from center to ends???)
-fix header/form css???
 
 /** business logic issues
-start game should scroll to bottom
 
 /** technical logic issues
-move dynamic gameComponent creation/destruction to service???
-move app/wrapper component redundant logic to services;
-is massive assignments in properties needed?
-change wrapper-compoonent to main-component???
 
 /** Bugs issues
 
 /** final changes issues
-delete test files / create tests / ask Den to write unit-tests??
-create build-file
-move to deployment??? / github pages ??
+final clean-up;
+move to deployment??? / github pages / herokU??????
 add readme-file;
 remove to-do-file;
-final clean-up;

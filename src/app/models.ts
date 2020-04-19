@@ -1,6 +1,7 @@
 export interface Message {
     text: string;
     person: 'guesser' | 'puzzler';
+    isFirst?: boolean;
     stop?: boolean;
 }
 

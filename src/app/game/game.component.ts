@@ -7,7 +7,7 @@ import { StateService } from '@project/state.service'
 import { GameService } from '@project/game.service';
 import { FormControl } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
-import { scan, takeUntil } from 'rxjs/operators';
+import { scan, takeUntil, delay } from 'rxjs/operators';
 import { Message } from '@project/models';
 
 
@@ -17,29 +17,40 @@ import { Message } from '@project/models';
     styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit, OnDestroy {
-    constructor(private state: StateService, private game: GameService) { }
+    constructor(
+        private state: StateService,
+        private game: GameService,
+        ) { }
 
     private unsubscriber$: Subject<void> = new Subject;
+    private input: FormControl;
 
+    showDivider: boolean;
     shouldScroll: boolean;
-    input: FormControl = new FormControl('');   //check if private flag can be used instead public / move initialization to inInit??
     incorrectInput: boolean;
-    messages$: Observable<Message[]> = this.game.chatListener$.pipe(    //move to ngOnInit??
-        takeUntil(this.unsubscriber$),
-        scan((acc: Message[], val: Message) => {
-            if (val.stop) {
-                this.state.messageShouldScroll$.next(false);
-                this.unsubscriber$.next();
-                this.unsubscriber$.complete();
-            }
-            acc.push(val);
-            return acc
-        }, []),
-    );
+    messages$: Observable<Message[]>;
 
     ngOnInit() {
         this.shouldScroll = true;
         this.incorrectInput = false;
+        this.showDivider = false;
+        this.input = new FormControl('');
+        this.messages$ = this.game.chatListener$.pipe(
+            takeUntil(this.unsubscriber$),
+            scan((acc: Message[], val: Message) => {
+                acc.push(val);
+                return acc
+            }, []),
+        );
+
+        this.state.isEnded$.pipe(
+            takeUntil(this.unsubscriber$),
+            delay(1800)
+        ).subscribe(() => {
+                this.showDivider = true;
+                this.unsubscriber$.next();
+                this.unsubscriber$.complete();
+        });
 
         this.state.messageShouldScroll$.pipe(
             takeUntil(this.unsubscriber$),
@@ -72,7 +83,7 @@ export class GameComponent implements OnInit, OnDestroy {
     }
 
     private shouldHandleInput(): boolean {
-        return !this.input.disabled
+        return !this.input.disabled;
     }
 
     onInputKeyDown(event: KeyboardEvent): void {
