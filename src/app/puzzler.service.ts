@@ -22,10 +22,11 @@ export class PuzzlerService {
             ? 'match'
             : this.secretNumber > guess
                 ? 'more' : 'less';
-        setTimeout(() => this.state.chat$.next({
+
+        this.state.chat$.next({
             text: this.guessedAnswerMessage(way, guess),
             person: 'puzzler',
-        }), 3000);
+        });
     }
 
     rememberNumber(input: number): void {

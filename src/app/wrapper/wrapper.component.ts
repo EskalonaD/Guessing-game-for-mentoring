@@ -9,7 +9,7 @@ import {
     OnInit,
 } from '@angular/core';
 import { StateService } from '@project/state.service';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, delay } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { GameAnchorDirective } from '@project/game-anchor.directive';
 import { GameComponent } from '@project/game/game.component';
@@ -51,6 +51,7 @@ import { FooterComponent } from '@project/footer/footer.component';
 
         this.state.isEnded$.pipe(
             takeUntil(this.unsubscriber$),
+            delay(3000),
         ).subscribe(shouldShow => {
             this.showFooter = shouldShow;
             if(shouldShow) {
@@ -69,7 +70,7 @@ import { FooterComponent } from '@project/footer/footer.component';
                 this.showScrollBottomButton = !boolean;
             });
 
-        this.state.chat$.pipe(
+        this.state.chatDelayer$.pipe(
             takeUntil(this.unsubscriber$),
         ).subscribe(_ => this.onScroll());
     }

@@ -9,8 +9,8 @@ import {
 import { StateService } from '@project/state.service'
 import { GameService } from '@project/game.service';
 import { FormControl } from '@angular/forms';
-import { Observable, Subject } from 'rxjs';
-import { scan, takeUntil } from 'rxjs/operators';
+import { Observable, Subject, empty, Subscription } from 'rxjs';
+import { scan, takeUntil, tap, delay } from 'rxjs/operators';
 import { Message } from '@project/models';
 
 
@@ -27,11 +27,13 @@ export class GameComponent implements OnInit, OnDestroy {
 
     private unsubscriber$: Subject<void> = new Subject;
     private input: FormControl;
+    // private stopGame: Subscription;
 
     showDivider: boolean;
     shouldScroll: boolean;
     incorrectInput: boolean;
     messages$: Observable<Message[]>;
+
 
     ngOnInit() {
         this.shouldScroll = true;
@@ -41,16 +43,20 @@ export class GameComponent implements OnInit, OnDestroy {
         this.messages$ = this.game.chatListener$.pipe(
             takeUntil(this.unsubscriber$),
             scan((acc: Message[], val: Message) => {
-                if (val.stop) {
-                    setTimeout(() => this.showDivider = true, 1800);
-                    this.unsubscriber$.next();
-                    this.unsubscriber$.complete();
-                }
                 acc.push(val);
                 return acc
             }, []),
+            // delay(1800),
         );
 
+        this.state.isEnded$.pipe(
+            takeUntil(this.unsubscriber$),
+            delay(1800)
+        ).subscribe(() => {
+                this.showDivider = true;
+                this.unsubscriber$.next();
+                this.unsubscriber$.complete();
+        });
         this.state.messageShouldScroll$.pipe(
             takeUntil(this.unsubscriber$),
         ).subscribe(boolean => this.shouldScroll = boolean);
@@ -82,7 +88,7 @@ export class GameComponent implements OnInit, OnDestroy {
     }
 
     private shouldHandleInput(): boolean {
-        return !this.input.disabled
+        return !this.input.disabled;
     }
 
     onInputKeyDown(event: KeyboardEvent): void {
