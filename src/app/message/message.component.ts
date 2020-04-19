@@ -1,16 +1,18 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Message } from '@project/models';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { interval, Subject, merge, of } from 'rxjs';
+import { takeUntil, tap, reduce, startWith } from 'rxjs/operators';
 
 const picturesMapper = {
     puzzler: '../assets/71560.jpg',
     guesser: '../assets/114469.png',
 }
 
-enum Colours {
-    guesser = 'rgb(252, 143, 228)',
-    puzzler = 'rgb(35, 102, 146)',
-}
+// enum Blinking {
+//     'coloured' = 'f',
+//     'decoloured' = false,
+// }
 
 let colour: string;
 
@@ -20,33 +22,65 @@ let colour: string;
     styleUrls: ['./message.component.scss'],
     animations: [
         trigger('blinking', [
-            state('coloured', style({
-                color: '#f00',
+            state('show', style({
+                opacity: '1',
             })),
-            state('decoloured', style({
-                color: '#fff',
+            state('hide', style({
+                opacity: '0',
             })),
-            transition('coloured <=> decoloured', [animate('0.3s')]),
+            transition('show => hide', [animate('1.5s 0s ease-in')]),
+            transition('hide => show', [animate('1.5s 0s ease-out')]),
+            // transition('white <=> guesser', [animate('1s')]),
         ])
     ],
 })
-export class MessageComponent implements OnInit {
+export class MessageComponent implements OnInit, OnDestroy {
     constructor() { }
 
     @Input() message: Message;
 
+    private unsubscriber$: Subject<void> = new Subject;
+
     showLoader: boolean;
     logoURL: string;
+    colour: string;
 
     ngOnInit() {
         this.showLoader = true;
         this.logoURL = picturesMapper[this.message.person];
         // using external variable;
-        colour = Colours[this.message.person],
+        this.colour = 'hide'
+        // this.message.person;
+        // 'white'
 
-        setTimeout(() => {
-            this.showLoader = false;
-        }, 1600);
+        // merge(of(1), interval(1500)).pipe(
+        //     takeUntil(this.unsubscriber$),
+        //     // startWith(1),
+        //     tap(_ => {
+        //         console.log(_)
+        //         // colour = this.message.person;
+        //         this.colour = this.colour === 'show' ? 'hide' : 'show';
+        //     })
+        // ).subscribe();
+        interval(1500).pipe(
+            takeUntil(this.unsubscriber$),
+            startWith(1),
+            tap(_ => {
+                // colour = this.message.person;
+                this.colour = this.colour === 'show' ? 'hide' : 'show';
+            })
+        ).subscribe();
+
+        // setTimeout(() => {
+        //     this.showLoader = false;
+        //     this.unsubscriber$.next();
+        //     this.unsubscriber$.complete();
+        // }, 1600);
+    }
+
+    ngOnDestroy(){
+        this.unsubscriber$.next();
+        this.unsubscriber$.complete();
     }
 
 

@@ -3,7 +3,7 @@
     <p class="nickname">{{ message.person }}</p>
 </div>
 <div
-    [@blinking]="coloured"
+    [@blinking]="colour"
     class="loader"
     *ngIf="showLoader; else messageBlock"
 >{{message.person}} typing...</div>

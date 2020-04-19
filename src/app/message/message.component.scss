@@ -10,6 +10,10 @@
     &.guesser .loader {
         color: rgb(252, 143, 228);
     }
+
+    &.puzzler .loader {
+        color: rgb(35, 102, 146);
+    }
 }
 
 .user {
@@ -42,9 +46,8 @@
     font-size: 14px;
     align-self: flex-end;
     margin-bottom: 1px;
-    color: rgb(35, 102, 146);
     font-weight: normal;
-    animation-name: blinking;
+    // animation-name: blinking;
     animation-duration: 1.5s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
