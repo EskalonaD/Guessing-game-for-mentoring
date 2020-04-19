@@ -9,7 +9,12 @@ export class PuzzlerService {
     constructor(private state: StateService) { }
 
     secretNumber: number;
-    messagesTemplate: string[] = ['No, it\'s', 'You\'re not correct, it\'s', 'Try again, it\'s', 'Actually no, it\'s'];
+    messagesTemplate: string[] = [
+        'No, it\'s',
+        'You\'re not correct, it\'s',
+        'Try again, it\'s',
+        'Actually no, it\'s'
+    ];
 
     guessedAnswerMessage(way: GuessWay, guess: number): string {
         if (way === 'match') return 'You are right!';

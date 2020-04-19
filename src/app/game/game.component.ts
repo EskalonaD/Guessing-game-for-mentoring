@@ -2,15 +2,12 @@ import {
     Component,
     OnInit,
     OnDestroy,
-    ViewChild,
-    ElementRef,
-    Renderer2,
 } from '@angular/core';
 import { StateService } from '@project/state.service'
 import { GameService } from '@project/game.service';
 import { FormControl } from '@angular/forms';
-import { Observable, Subject, empty, Subscription } from 'rxjs';
-import { scan, takeUntil, tap, delay } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { scan, takeUntil, delay } from 'rxjs/operators';
 import { Message } from '@project/models';
 
 
@@ -27,13 +24,11 @@ export class GameComponent implements OnInit, OnDestroy {
 
     private unsubscriber$: Subject<void> = new Subject;
     private input: FormControl;
-    // private stopGame: Subscription;
 
     showDivider: boolean;
     shouldScroll: boolean;
     incorrectInput: boolean;
     messages$: Observable<Message[]>;
-
 
     ngOnInit() {
         this.shouldScroll = true;
@@ -46,7 +41,6 @@ export class GameComponent implements OnInit, OnDestroy {
                 acc.push(val);
                 return acc
             }, []),
-            // delay(1800),
         );
 
         this.state.isEnded$.pipe(
@@ -57,6 +51,7 @@ export class GameComponent implements OnInit, OnDestroy {
                 this.unsubscriber$.next();
                 this.unsubscriber$.complete();
         });
+
         this.state.messageShouldScroll$.pipe(
             takeUntil(this.unsubscriber$),
         ).subscribe(boolean => this.shouldScroll = boolean);

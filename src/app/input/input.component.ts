@@ -18,7 +18,6 @@ export const CUSTOM_INPUT_VALUE_ACCESSOR: any = {
     multi: true,
 };
 
-// move component to playground
 @Component({
     selector: 'app-input',
     templateUrl: './input.component.html',

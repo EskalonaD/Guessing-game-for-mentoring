@@ -7,11 +7,11 @@ import { delay, delayWhen } from 'rxjs/operators';
     providedIn: 'root'
 })
 export class StateService {
-    //should i unsubscribe/resubscribe?
     chat$: Subject<Message> = new Subject;
     chatDelayer$: Observable<Message> = this.chat$.pipe(
         delayWhen(({ isFirst }) => isFirst? empty() : empty().pipe(delay(3000))),
         );
+    scrollToBottomButtonHideZone$: Subject<string> = new Subject;
     messageShouldScroll$: Subject<boolean> = new Subject;
     isEnded$: Subject<boolean> = new Subject;
 }
