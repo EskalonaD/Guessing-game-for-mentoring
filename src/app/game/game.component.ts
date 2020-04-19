@@ -23,8 +23,8 @@ export class GameComponent implements OnInit, OnDestroy {
         ) { }
 
     private unsubscriber$: Subject<void> = new Subject;
-    private input: FormControl;
 
+    input: FormControl;
     showDivider: boolean;
     shouldScroll: boolean;
     incorrectInput: boolean;
