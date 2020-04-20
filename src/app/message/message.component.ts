@@ -4,7 +4,7 @@ import { Message } from '@project/models';
 const picturesMapper = {
     // gh-pages may require to move address to external web-site
     puzzler: '../assets/71560.jpg',
-    guesser: '../asssets/114469.png',
+    guesser: '../assets/114469.png',
 };
 
 @Component({
