@@ -2,8 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Message } from '@project/models';
 
 const picturesMapper = {
-    puzzler: '../assets/71560.jpg',
-    guesser: '../assets/114469.png',
+    puzzler: 'https://avatarfiles.alphacoders.com/114/71560.jpg',
+    guesser: 'https://avatarfiles.alphacoders.com/114/114469.png',
 };
 
 @Component({
