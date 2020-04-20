@@ -2,8 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Message } from '@project/models';
 
 const picturesMapper = {
-    puzzler: 'https://avatarfiles.alphacoders.com/114/71560.jpg',
-    guesser: 'https://avatarfiles.alphacoders.com/114/114469.png',
+    // gh-pages may require to move address to external web-site
+    puzzler: '../assets/71560.jpg',
+    guesser: '../asssets/114469.png',
 };
 
 @Component({
