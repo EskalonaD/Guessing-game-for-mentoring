@@ -50,7 +50,7 @@ fieldset{
         transition: all 0.3s;
 
         &.clicked-placeholder {
-            top: calc(0px - 0.3em);
+            top: calc(0px - 1.2em);
             font-size: 0.8em;
         }
     }
